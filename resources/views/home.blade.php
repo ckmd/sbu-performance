@@ -1,9 +1,13 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+@section('title', 'Dashboard - Home')
 
+@section('content_header')
+    <h1>Dashboard</h1>
+@stop
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
@@ -20,4 +24,4 @@
         </div>
     </div>
 </div>
-@endsection
+@stop
