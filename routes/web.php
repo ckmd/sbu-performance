@@ -20,4 +20,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('rawdata','RawdataController');
+Route::resource('rawdata','RawdataController')->middleware('auth');
