@@ -40,10 +40,10 @@ class RawdataController extends Controller
         //
 		// validasi
 		$this->validate($request, [
-			'file' => 'required|mimes:csv,xls,xlsx'
-		]);
- 
-		// menangkap file excel
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+
+        // menangkap file excel
 		$file = $request->file('file');
  
 		// membuat nama file unik
