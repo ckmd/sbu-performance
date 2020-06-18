@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Imports\RawdataImport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Rawdata;
 
 class RawdataController extends Controller
 {
@@ -17,6 +18,12 @@ class RawdataController extends Controller
     {
         return view('rawdata.index');
         //
+    }
+
+    public function alldata()
+    {
+        $datas = Rawdata::orderBy('Incident ID')->paginate(2);
+        return view('rawdata.alldata',compact('datas'));
     }
 
     /**
@@ -58,7 +65,8 @@ class RawdataController extends Controller
 		// notifikasi dengan session
 		// Session::flash('sukses','Data Siswa Berhasil Diimport!');
  
-		// alihkan halaman kembali
+        // filter hilangkan duplikasi berdasatrkan kolom ...
+        // alihkan halaman kembali
         return redirect('/home');
     }
 
