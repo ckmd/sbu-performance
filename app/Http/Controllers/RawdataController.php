@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Imports\RawdataImport;
+use Yajra\Datatables\Datatables;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Rawdata;
+use App\User;
+// use Datatables;
 
 class RawdataController extends Controller
 {
@@ -22,8 +25,13 @@ class RawdataController extends Controller
 
     public function alldata()
     {
-        $datas = Rawdata::orderBy('Incident ID')->paginate(2);
-        return view('rawdata.alldata',compact('datas'));
+        return view('rawdata.alldata');
+        // $datas = Rawdata::orderBy('Incident ID')->paginate(2);
+        // return view('rawdata.alldata',compact('datas'));
+    }
+    public function alldataList()
+    {
+        return Datatables::of(User::query())->make(true);
     }
 
     /**
