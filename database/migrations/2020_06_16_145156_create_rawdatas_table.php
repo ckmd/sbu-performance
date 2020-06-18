@@ -20,9 +20,9 @@ class CreateRawdatasTable extends Migration
             $table->bigInteger('Service ID');
             $table->string('Customer');
             $table->string('Region SBU (Terminating) (Address)');
-            // $table->dateTime('Created On', 0);
-            // $table->dateTime('Close Date', 0);
-            // $table->dateTime('Interference Time', 0);
+            $table->dateTime('Created On', 0);
+            $table->dateTime('Close Date', 0);
+            $table->dateTime('Interference Time', 0);
             // $table->string('Service ID Status');
             // $table->string('Product');
             // $table->string('Interference Cause (Incident ID) (Incident)');

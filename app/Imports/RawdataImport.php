@@ -15,15 +15,16 @@ class RawdataImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
+        // $reader->;
         return new Rawdata([
             'Ticket ID' => $row['ticket_id'],
             'Incident ID' => $row['incident_id'],
             'Service ID' => $row['service_id'],
             'Customer' => $row['customer'],
             'Region SBU (Terminating) (Address)' => $row['region_sbu_terminating_address'],
-            // 'Created On'                            => $row[8],
-            // 'Close Date'                            => $row[9], 
-            // 'Interference Time'                     => $row[10], 
+            'Created On' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['created_on']),
+            'Close Date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['close_date']), 
+            'Interference Time' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['interference_time']), 
             // 'Service ID Status' => $row[11], 
             // 'Product' => $row[12], 
             // 'Interference Cause (Incident ID) (Incident)' => $row[13],
