@@ -1,12 +1,12 @@
 @extends('adminlte::page')
-@section('title', 'Dashboard - raw data')
+@section('title', 'Dashboard - Upload Raw Data')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Dashboard - Raw Data</div>
+                <div class="card-header">Upload Raw Data</div>
 
                 <div class="card-body">
                     <div class="text-center">

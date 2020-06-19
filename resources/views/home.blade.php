@@ -1,9 +1,5 @@
 @extends('adminlte::page')
 @section('title', 'Dashboard - Home')
-
-@section('content_header')
-    <h1>Dashboard</h1>
-@stop
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -17,8 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                    <p>Data Ditampilkan Dari {{$firstData}} Hingga {{$lastData}}</p>
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Rawdata;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $firstData = Rawdata::orderBy('Created On', 'asc')->first()["Created On"];
+        $lastData = Rawdata::orderBy('Created On', 'desc')->first()["Created On"];
+        return view('home',compact('firstData', 'lastData'));
     }
 }

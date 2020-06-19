@@ -7,8 +7,6 @@ use App\Imports\RawdataImport;
 use Yajra\Datatables\Datatables;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Rawdata;
-use App\User;
-// use Datatables;
 
 class RawdataController extends Controller
 {
@@ -31,7 +29,8 @@ class RawdataController extends Controller
     }
     public function alldataList()
     {
-        return Datatables::of(Rawdata::query())->make(true);
+        $rawDatas = Rawdata::get()->unique('Ticket ID')->values()->all();
+        return Datatables::of($rawDatas)->make(true);
     }
 
     /**
