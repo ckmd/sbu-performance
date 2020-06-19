@@ -31,7 +31,7 @@ class RawdataController extends Controller
     }
     public function alldataList()
     {
-        return Datatables::of(User::query())->make(true);
+        return Datatables::of(Rawdata::query())->make(true);
     }
 
     /**
