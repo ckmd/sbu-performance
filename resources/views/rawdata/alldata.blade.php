@@ -30,6 +30,9 @@
                         { data: 'Interference Time', name: 'Interference Time' },
                         { data: 'Service ID Status', name: 'Service ID Status' },
                         { data: 'Product', name: 'Product' },
+                        { data: 'Bulan', name: 'Bulan' },
+                        { data: 'Minggu', name: 'Minggu' },
+                        { data: 'Hari', name: 'Hari' },
                      ]
             });
          });
@@ -61,6 +64,9 @@
                      <th>Interference Time</th>
                      <th>Service ID Status</th>
                      <th>Product</th>
+                     <th>Bulan</th>
+                     <th>Minggu</th>
+                     <th>Hari</th>
                   </tr>
                </thead>
             </table>

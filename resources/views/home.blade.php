@@ -19,10 +19,19 @@
             start:start,
             end:end,
           },
-          success:function(data){
+          beforeSend: function(){
+            // Show image container
+            $("#loader").show();
+        },
+        success:function(data){
+            $('#message').fadeOut('');
             $("#msg").html(data.msg);
             // console.log(response);
           },
+          complete:function(data){
+            // Hide image container
+            $("#loader").hide();
+        }
          });
         });
     </script>
@@ -76,7 +85,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <div id = 'msg'>This message will be replaced using Ajax.</div>
+                    <div id='loader' style='display: none;'>
+                        <p>Please Wait ...</p>
+                    </div>
+                    <!-- <div id = 'msg'>This message will be replaced using Ajax.</div> -->
                     <p>Data yang telah diupload dari {{$firstData}} hingga {{$lastData}}</p>
                     <h3>Year to date Monitoring</h3>
                     <form id="queryForm" action="">
@@ -112,10 +124,10 @@
 
                     </form>
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-9">
                             <canvas id="myChart"></canvas>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="row">
                                 <p>Realisasi KPI Nasional</p>
                                 <div class="col-md-6">
@@ -128,7 +140,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <p>Realisasi KPI SBU xxx </p>
+                                <p>Realisasi KPI&nbsp;<div id = 'msg'>SBU ... &ensp;</div></p>
+                                
                                 <div class="col-md-6">
                                     <p>600</p>
                                     <p>Menit</p>

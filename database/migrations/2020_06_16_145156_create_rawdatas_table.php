@@ -41,9 +41,12 @@ class CreateRawdatasTable extends Migration
             $table->text('Customer Group');
             $table->text('Description (Customer Segment) (Segment)')->nullable()->default(NULL);
             $table->text('Team Issue')->nullable()->default(NULL);
-            $table->integer('Total Amount (Activation List Number) (Activation List)');
+            $table->integer('Total Amount (Activation List Number) (Activation List)')->nullable()->default(NULL);
             $table->text('Status Reason');
             $table->text('Status');
+            $table->text('Bulan');
+            $table->integer('Minggu');
+            $table->integer('Hari');
             $table->timestamps();
         });
     }

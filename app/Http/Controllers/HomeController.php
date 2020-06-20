@@ -26,14 +26,13 @@ class HomeController extends Controller
     {
         $firstData = Rawdata::orderBy('Created On', 'asc')->first()["Created On"];
         $lastData = Rawdata::orderBy('Created On', 'desc')->first()["Created On"];
-        // belum selesai yaa, cara menampilkan distinct di blade
-        $sbuRegion = Rawdata::distinct('Region SBU (Terminating) (Address)')->pluck('Region SBU (Terminating) (Address)');
+        $sbuRegion = Rawdata::distinct('Region SBU (Terminating) (Address)')->pluck('Region SBU (Terminating) (Address)');        
         return view('home',compact('firstData', 'lastData', 'sbuRegion'));
     }
     public function message(Request $request)
     {
         // return $request;
-        $msg = $request->sbu;
-        return response()->json(array('msg'=> $msg), 200);
+        $sbu = $request->sbu;
+        return response()->json(array('msg'=> $sbu), 200);
     }
 }
