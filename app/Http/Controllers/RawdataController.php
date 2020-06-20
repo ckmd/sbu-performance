@@ -51,11 +51,16 @@ class RawdataController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        ini_set('upload_max_filesize', '200M');
+        ini_set('memory_limit', '-1');
+        
+        Rawdata::truncate();
+
 		// validasi
-		$this->validate($request, [
-            'file' => 'required|mimes:csv,xls,xlsx'
-        ]);
+		// $this->validate($request, [
+        //     'file' => 'required|mimes:csv,xls,xlsx'
+        // ]);
+        // return 'yes';
 
         // menangkap file excel
 		$file = $request->file('file');
