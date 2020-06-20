@@ -77,7 +77,7 @@
                         </div>
                     @endif
                     <div id = 'msg'>This message will be replaced using Ajax.</div>
-                    <p>Data Ditampilkan Dari {{$firstData}} Hingga {{$lastData}}</p>
+                    <p>Data yang telah diupload dari {{$firstData}} hingga {{$lastData}}</p>
                     <h3>Year to date Monitoring</h3>
                     <form id="queryForm" action="">
                         <div class="row">
@@ -86,9 +86,9 @@
                                     <label for="">SBU Region</label>
                                     <select class="custom-select" id="sbu" name="sbu">
                                         <option selected>Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        @foreach($sbuRegion as $key => $value)
+                                            <option value="{{$value}}">{{$value}}</option>
+                                        @endforeach
                                     </select>
                                     <!-- <input class="form-control" type="date" name="" id=""> -->
                                 </div>
