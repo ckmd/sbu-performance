@@ -28,4 +28,10 @@ class HomeController extends Controller
         $lastData = Rawdata::orderBy('Created On', 'desc')->first()["Created On"];
         return view('home',compact('firstData', 'lastData'));
     }
+    public function message(Request $request)
+    {
+        // return $request;
+        $msg = $request->sbu;
+        return response()->json(array('msg'=> $msg), 200);
+    }
 }
