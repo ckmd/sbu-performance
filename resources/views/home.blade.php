@@ -125,106 +125,12 @@
                     </div>
                     <!-- <div id = 'msg'>This message will be replaced using Ajax.</div> -->
                     <p>Rawdata SBU yang telah diupload dari {{$firstData}} hingga {{$lastData}}</p>
-                    <!-- <form id="queryForm" action=""> -->
-                    <form action="/home" id="" method="POST"  enctype="multipart/form-data">
-                    {{csrf_field()}}
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="">SBU Region</label>
-                                    <select class="custom-select" id="sbu" name="sbu">
-                                        <option selected value="">Choose...</option>
-                                        @foreach($sbuRegion as $key => $value)
-                                            <option value="{{$value}}">{{$value}}</option>
-                                        @endforeach
-                                    </select>
-                                    <!-- <input class="form-control" type="date" name="" id=""> -->
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="">Start Date</label>
-                                    <input class="form-control" type="date" name="start" id="start">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="">End Date</label>
-                                    <input class="form-control" type="date" name="end" id="end">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-success" id="submit">Submit</button>
-                        </div>
-                    </form>
-                    @if($condition == true)
-                    <h3>Year to date Monitoring</h3>
-                    <div class="row">
-                        <div class="col-md-9">
-                            <canvas id="monthlyChart"></canvas>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="row">
-                                <p>Realisasi KPI Nasional</p>
-                                <div class="col-md-6">
-                                    <p>600</p>
-                                    <p>Menit</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>86</p>
-                                    <p>Percent</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <p>Realisasi KPI {{$sbu}}</p>
-                                <!-- <div id = 'msg'>SBU ... &ensp;</div> -->
-                                
-                                <div class="col-md-6">
-                                    <p>600</p>
-                                    <p>Menit</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>86</p>
-                                    <p>Percent</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <h3>Monthly Monitoring</h3>
-                    <canvas id="myChart"></canvas>
-
-                    <h3>Weekly Monitoring</h3>
-                    <div class="row">
-                        <div class="col-md-9">
-                            <canvas id="weeklyChart"></canvas>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="row">
-                                <p>Realisasi KPI Nasional</p>
-                                <div class="col-md-6">
-                                    <p>600</p>
-                                    <p>Menit</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>86</p>
-                                    <p>Percent</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <p>Realisasi KPI {{$sbu}}</p>                                
-                                <div class="col-md-6">
-                                    <p>600</p>
-                                    <p>Menit</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>86</p>
-                                    <p>Percent</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @include('dashboard.filterForm')
+                    @if($showChart == true)
+                    @include('dashboard.yearToDate')
+                    @include('dashboard.monthly')
+                    @include('dashboard.weekly')
 
                     <h3>Daily Monitoring</h3>
                     <canvas id="myChart"></canvas>
