@@ -23,10 +23,11 @@
             // Show image container
             $("#loader").show();
         },
-        success:function(data){
+        success:function(response){
+            // var json = $.parseJSON(response);
             $('#message').fadeOut('');
-            $("#msg").html(data.msg);
-            // console.log(response);
+            // $("#msg").html(data.msg);
+            console.log(response);
           },
           complete:function(data){
             // Hide image container
@@ -45,25 +46,30 @@
 
             // The data for our dataset
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                datasets: [{
+                // labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: <?php echo json_encode($mingguKe ?? '');?>,
+                datasets: [
+                {
                     label: 'Nasional',
                     lineTension: 0,
                     backgroundColor: 'transparent',
                     borderColor: 'rgb(255, 99, 132)',
-                    data: [0, 10, 5, 2, 20, 30, 45]
-                }, {
-                    label: 'SBU xxx',
+                    data: <?php echo json_encode($nationalVal ?? ''); ?>,
+                }, 
+                {
+                    label: <?php echo json_encode($sbu ?? ''); ?>,
                     lineTension: 0,
                     backgroundColor: 'transparent',
                     borderColor: 'rgb(99, 255, 132)',
-                    data: [12, 5, 4, 11, 25, 20, 35]
-                }, {
-                    label: 'KPI',
-                    backgroundColor: 'transparent',
-                    borderColor: 'rgb(132, 99, 255)',
-                    data: [20, 20, 20, 20, 20, 20, 20]
-                }],
+                    data: <?php echo json_encode($mingguVal ?? ''); ?>
+                },
+                // {
+                //     label: 'KPI',
+                //     backgroundColor: 'transparent',
+                //     borderColor: 'rgb(132, 99, 255)',
+                //     data: [200, 20, 20, 20, 20]
+                // }
+                ],
             },
 
             // Configuration options go here
@@ -91,7 +97,9 @@
                     <!-- <div id = 'msg'>This message will be replaced using Ajax.</div> -->
                     <p>Data yang telah diupload dari {{$firstData}} hingga {{$lastData}}</p>
                     <h3>Year to date Monitoring</h3>
-                    <form id="queryForm" action="">
+                    <!-- <form id="queryForm" action=""> -->
+                    <form action="/home" id="" method="POST"  enctype="multipart/form-data">
+                    {{csrf_field()}}
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
