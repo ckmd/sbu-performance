@@ -38,8 +38,9 @@
     </script>
     <!-- javascript for handling chart JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <!-- Chart untuk mingguan -->
     <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
+        var ctx = document.getElementById('weeklyChart').getContext('2d');
         var chart = new Chart(ctx, {
             // The type of chart we want to create
             type: 'line',
@@ -54,7 +55,7 @@
                     lineTension: 0,
                     backgroundColor: 'transparent',
                     borderColor: 'rgb(255, 99, 132)',
-                    data: <?php echo json_encode($nationalVal ?? ''); ?>,
+                    data: <?php echo json_encode($nationalMingguVal ?? ''); ?>,
                 }, 
                 {
                     label: <?php echo json_encode($sbu ?? ''); ?>,
@@ -63,12 +64,40 @@
                     borderColor: 'rgb(99, 255, 132)',
                     data: <?php echo json_encode($mingguVal ?? ''); ?>
                 },
-                // {
-                //     label: 'KPI',
-                //     backgroundColor: 'transparent',
-                //     borderColor: 'rgb(132, 99, 255)',
-                //     data: [200, 20, 20, 20, 20]
-                // }
+                ],
+            },
+
+            // Configuration options go here
+            options: {
+            }
+        });
+    </script>
+    <!-- Chart untuk bulanan -->
+    <script>
+        var ctx = document.getElementById('monthlyChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                // labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: <?php echo json_encode($bulanKe ?? '');?>,
+                datasets: [
+                {
+                    label: 'Nasional',
+                    lineTension: 0,
+                    backgroundColor: 'transparent',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: <?php echo json_encode($nationalBulanVal ?? ''); ?>,
+                }, 
+                {
+                    label: <?php echo json_encode($sbu ?? ''); ?>,
+                    lineTension: 0,
+                    backgroundColor: 'transparent',
+                    borderColor: 'rgb(99, 255, 132)',
+                    data: <?php echo json_encode($bulanVal ?? ''); ?>
+                },
                 ],
             },
 
@@ -133,7 +162,7 @@
                     <h3>Year to date Monitoring</h3>
                     <div class="row">
                         <div class="col-md-9">
-                            <canvas id="myChart"></canvas>
+                            <canvas id="monthlyChart"></canvas>
                         </div>
                         <div class="col-md-3">
                             <div class="row">
@@ -148,7 +177,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <p>Realisasi KPI&nbsp;<div id = 'msg'>SBU ... &ensp;</div></p>
+                                <p>Realisasi KPI {{$sbu}}</p>
+                                <!-- <div id = 'msg'>SBU ... &ensp;</div> -->
                                 
                                 <div class="col-md-6">
                                     <p>600</p>
@@ -166,7 +196,35 @@
                     <canvas id="myChart"></canvas>
 
                     <h3>Weekly Monitoring</h3>
-                    <canvas id="myChart"></canvas>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <canvas id="weeklyChart"></canvas>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <p>Realisasi KPI Nasional</p>
+                                <div class="col-md-6">
+                                    <p>600</p>
+                                    <p>Menit</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>86</p>
+                                    <p>Percent</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p>Realisasi KPI {{$sbu}}</p>                                
+                                <div class="col-md-6">
+                                    <p>600</p>
+                                    <p>Menit</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>86</p>
+                                    <p>Percent</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <h3>Daily Monitoring</h3>
                     <canvas id="myChart"></canvas>
