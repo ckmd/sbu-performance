@@ -49,7 +49,7 @@ class RawdataImport implements ToModel, WithHeadingRow
             'Status' => $row['status'],
             'Bulan' => date_format($createdOn, "F"),
             'Minggu' => date_format($createdOn, "W"),
-            'Hari' => date_format($createdOn, "d")
+            'Hari' => date_format($createdOn, "d-m-Y")
         ]);
     }
 }

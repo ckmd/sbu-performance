@@ -38,40 +38,6 @@
     </script>
     <!-- javascript for handling chart JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <!-- Chart untuk mingguan -->
-    <script>
-        var ctx = document.getElementById('weeklyChart').getContext('2d');
-        var chart = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'line',
-
-            // The data for our dataset
-            data: {
-                // labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                labels: <?php echo json_encode($mingguKe ?? '');?>,
-                datasets: [
-                {
-                    label: 'Nasional',
-                    lineTension: 0,
-                    backgroundColor: 'transparent',
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: <?php echo json_encode($nationalMingguVal ?? ''); ?>,
-                }, 
-                {
-                    label: <?php echo json_encode($sbu ?? ''); ?>,
-                    lineTension: 0,
-                    backgroundColor: 'transparent',
-                    borderColor: 'rgb(99, 255, 132)',
-                    data: <?php echo json_encode($mingguVal ?? ''); ?>
-                },
-                ],
-            },
-
-            // Configuration options go here
-            options: {
-            }
-        });
-    </script>
     <!-- Chart untuk Year to date -->
     <script>
         var ctx = document.getElementById('yearToDateChart').getContext('2d');
@@ -147,6 +113,74 @@
             }
         });
     </script>
+    <!-- Chart untuk mingguan -->
+    <script>
+        var ctx = document.getElementById('weeklyChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                // labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: <?php echo json_encode($mingguKe ?? '');?>,
+                datasets: [
+                {
+                    label: 'Nasional',
+                    lineTension: 0,
+                    backgroundColor: 'transparent',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: <?php echo json_encode($nationalMingguVal ?? ''); ?>,
+                }, 
+                {
+                    label: <?php echo json_encode($sbu ?? ''); ?>,
+                    lineTension: 0,
+                    backgroundColor: 'transparent',
+                    borderColor: 'rgb(99, 255, 132)',
+                    data: <?php echo json_encode($mingguVal ?? ''); ?>
+                },
+                ],
+            },
+
+            // Configuration options go here
+            options: {
+            }
+        });
+    </script>
+    <!-- Chart untuk harian -->
+    <script>
+        var ctx = document.getElementById('dailyChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                // labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: <?php echo json_encode($hariKe ?? '');?>,
+                datasets: [
+                {
+                    label: 'Nasional',
+                    lineTension: 0,
+                    backgroundColor: 'transparent',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: <?php echo json_encode($nationalHariVal ?? ''); ?>,
+                }, 
+                {
+                    label: <?php echo json_encode($sbu ?? ''); ?>,
+                    lineTension: 0,
+                    backgroundColor: 'transparent',
+                    borderColor: 'rgb(99, 255, 132)',
+                    data: <?php echo json_encode($hariVal ?? ''); ?>
+                },
+                ],
+            },
+
+            // Configuration options go here
+            options: {
+            }
+        });
+    </script>
 @stop
 @section('content')
 <div class="container">
@@ -172,9 +206,7 @@
                     @include('dashboard.yearToDate')
                     @include('dashboard.monthly')
                     @include('dashboard.weekly')
-
-                    <h3>Daily Monitoring</h3>
-                    <canvas id="myChart"></canvas>
+                    @include('dashboard.daily')
                     @endif
                 </div>
             </div>

@@ -32,6 +32,9 @@ class HomeController extends Controller
     }
     public function message(Request $request)
     {
+        ini_set('upload_max_filesize', '200M');
+        ini_set('memory_limit', '-1');
+
         $kpi = 480;
         if($request->sbu == ""){
             return redirect('home');
@@ -42,12 +45,12 @@ class HomeController extends Controller
         $sbuRegion = Rawdata::distinct('Region SBU (Terminating) (Address)')->pluck('Region SBU (Terminating) (Address)');
 
         // start filter per bulan
-        // filter berdasarkan SBU
+        // filter per bulan berdasarkan SBU
         $sbu = $request->sbu;
         $rawdataFilteredBySBU = Rawdata::where('Region SBU (Terminating) (Address)', $sbu)->get();
         $groupbyMonth = $rawdataFilteredBySBU->groupBy('Bulan');
 
-        // data nasional tanpa filter
+        // data per bulan nasional tanpa filter
         $nationalGroupbyMonth = Rawdata::get()->groupBy('Bulan');
 
         // secara nasional
@@ -84,11 +87,35 @@ class HomeController extends Controller
             $mingguVal[] = $avg;
         }
         // end filter per minggu
+
+        // start filter per hari
+        // filter berdasarkan SBU
+        $sbu = $request->sbu;
+        $rawdataFilteredBySBU = Rawdata::where('Region SBU (Terminating) (Address)', $sbu)->get();
+        $groupbyDay = $rawdataFilteredBySBU->groupBy('Hari');
+
+        // data nasional tanpa filter
+        $nationalGroupbyDay = Rawdata::get()->groupBy('Hari');
+        // secara nasional
+        foreach ($nationalGroupbyDay as $key => $gbd){
+            $avg = round(collect($gbd->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),2);
+            $nationalHariVal[] = $avg;
+        }
+        // per sbu
+        foreach ($groupbyDay as $key => $gbd){
+            $avg = round(collect($gbd->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),2);
+            $hariKe[] = $key;
+            $hariVal[] = $avg;
+        }
+        // end filter per hari
+
         return view('home',compact(
             'sbu',
             'firstData', 
             'lastData', 'kpiVal',
-            'sbuRegion','showChart','mingguKe','mingguVal', 'nationalMingguVal',
+            'sbuRegion','showChart',
+            'hariKe','hariVal', 'nationalHariVal',
+            'mingguKe','mingguVal', 'nationalMingguVal',
             'bulanKe','bulanVal', 'nationalBulanVal'));
         // sampe sini, membuat array / object dari hasil rata2
 

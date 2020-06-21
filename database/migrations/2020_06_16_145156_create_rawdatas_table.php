@@ -46,7 +46,7 @@ class CreateRawdatasTable extends Migration
             $table->text('Status')->nullable()->default(NULL);
             $table->text('Bulan');
             $table->integer('Minggu');
-            $table->integer('Hari');
+            $table->text('Hari');
             $table->timestamps();
         });
     }

@@ -1,11 +1,11 @@
-<h3>Monthly Monitoring - {{$sbu}}</h3>
+<h3>Daily Monitoring - {{$sbu}}</h3>
 <div class="row">
     <div class="col-md-9">
-        <canvas id="monthlyChart"></canvas>
+        <canvas id="dailyChart"></canvas>
     </div>
     <div class="col-md-3">
         <div class="row">
-            <p>Realisasi KPI Secara Nasional</p>
+            <p>Realisasi KPI Nasional</p>
             <div class="col-md-6">
                 <p>600</p>
                 <p>Menit</p>
@@ -16,9 +16,7 @@
             </div>
         </div>
         <div class="row">
-            <p>Realisasi KPI {{$sbu}}</p>
-            <!-- <div id = 'msg'>SBU ... &ensp;</div> -->
-            
+            <p>Realisasi KPI {{$sbu}}</p>                                
             <div class="col-md-6">
                 <p>600</p>
                 <p>Menit</p>

@@ -1,4 +1,4 @@
-<h3>Weekly Monitoring</h3>
+<h3>Weekly Monitoring - {{$sbu}}</h3>
 <div class="row">
     <div class="col-md-9">
         <canvas id="weeklyChart"></canvas>
