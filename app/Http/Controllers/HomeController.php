@@ -32,6 +32,7 @@ class HomeController extends Controller
     }
     public function message(Request $request)
     {
+        $kpi = 480;
         if($request->sbu == ""){
             return redirect('home');
         }
@@ -57,6 +58,7 @@ class HomeController extends Controller
         // per sbu
         foreach ($groupbyMonth as $key => $gbm){
             $avg = round(collect($gbm->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),2);
+            $kpiVal[] = $kpi;
             $bulanKe[] = $key;
             $bulanVal[] = $avg;
         }
@@ -85,7 +87,7 @@ class HomeController extends Controller
         return view('home',compact(
             'sbu',
             'firstData', 
-            'lastData', 
+            'lastData', 'kpiVal',
             'sbuRegion','showChart','mingguKe','mingguVal', 'nationalMingguVal',
             'bulanKe','bulanVal', 'nationalBulanVal'));
         // sampe sini, membuat array / object dari hasil rata2

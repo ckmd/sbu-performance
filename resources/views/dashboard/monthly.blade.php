@@ -1,2 +1,32 @@
 <h3>Monthly Monitoring</h3>
-<canvas id="myChart"></canvas>
+<div class="row">
+    <div class="col-md-9">
+        <canvas id="monthlyChart"></canvas>
+    </div>
+    <div class="col-md-3">
+        <div class="row">
+            <p>Realisasi KPI Secara Nasional</p>
+            <div class="col-md-6">
+                <p>600</p>
+                <p>Menit</p>
+            </div>
+            <div class="col-md-6">
+                <p>86</p>
+                <p>Percent</p>
+            </div>
+        </div>
+        <div class="row">
+            <p>Realisasi KPI {{$sbu}}</p>
+            <!-- <div id = 'msg'>SBU ... &ensp;</div> -->
+            
+            <div class="col-md-6">
+                <p>600</p>
+                <p>Menit</p>
+            </div>
+            <div class="col-md-6">
+                <p>86</p>
+                <p>Percent</p>
+            </div>
+        </div>
+    </div>
+</div>

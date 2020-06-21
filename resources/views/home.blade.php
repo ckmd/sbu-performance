@@ -72,7 +72,48 @@
             }
         });
     </script>
-    <!-- Chart untuk bulanan -->
+    <!-- Chart untuk Year to date -->
+    <script>
+        var ctx = document.getElementById('yearToDateChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                // labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: <?php echo json_encode($bulanKe ?? '');?>,
+                datasets: [
+                {
+                    label: 'Nasional',
+                    lineTension: 0,
+                    backgroundColor: 'transparent',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: <?php echo json_encode($nationalBulanVal ?? ''); ?>,
+                }, 
+                {
+                    label: <?php echo json_encode($sbu ?? ''); ?>,
+                    lineTension: 0,
+                    backgroundColor: 'transparent',
+                    borderColor: 'rgb(99, 255, 132)',
+                    data: <?php echo json_encode($bulanVal ?? ''); ?>
+                },
+                {
+                    label: 'KPI',
+                    lineTension: 0,
+                    backgroundColor: 'transparent',
+                    borderColor: 'rgb(99, 132, 255)',
+                    data: <?php echo json_encode($kpiVal ?? ''); ?>
+                },
+                ],
+            },
+
+            // Configuration options go here
+            options: {
+            }
+        });
+    </script>
+    <!-- Chart untuk Bulanan -->
     <script>
         var ctx = document.getElementById('monthlyChart').getContext('2d');
         var chart = new Chart(ctx, {
