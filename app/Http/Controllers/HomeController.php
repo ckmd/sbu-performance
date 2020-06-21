@@ -27,11 +27,15 @@ class HomeController extends Controller
         $firstData = Rawdata::orderBy('Created On', 'asc')->first()["Created On"];
         $lastData = Rawdata::orderBy('Created On', 'desc')->first()["Created On"];
         $sbuRegion = Rawdata::distinct('Region SBU (Terminating) (Address)')->pluck('Region SBU (Terminating) (Address)');
-        $val = array(0, 10, 5, 2, 20, 30, 45);
-        return view('home',compact('firstData', 'lastData', 'sbuRegion','val'));
+        $condition = false;
+        return view('home',compact('firstData', 'lastData', 'sbuRegion','condition'));
     }
     public function message(Request $request)
     {
+        if($request->sbu == ""){
+            return redirect('home');
+        }
+        $condition = true;
         $firstData = Rawdata::orderBy('Created On', 'asc')->first()["Created On"];
         $lastData = Rawdata::orderBy('Created On', 'desc')->first()["Created On"];
         $sbuRegion = Rawdata::distinct('Region SBU (Terminating) (Address)')->pluck('Region SBU (Terminating) (Address)');
@@ -52,8 +56,11 @@ class HomeController extends Controller
             $mingguKe[] = $key;
             $mingguVal[] = $avg;
         }
-        $val = array(0, 10, 5, 2, 20, 30, 45);
-        return view('home',compact('sbu','firstData', 'lastData', 'sbuRegion','val','mingguKe','mingguVal', 'nationalVal'));
+        return view('home',compact(
+            'sbu',
+            'firstData', 
+            'lastData', 
+            'sbuRegion','condition','mingguKe','mingguVal', 'nationalVal'));
         // sampe sini, membuat array / object dari hasil rata2
 
         return array('msg'=> $sbu,'mingguKe' => $mingguKe,'mingguVal' => $mingguVal);
