@@ -29,6 +29,10 @@ class RawdataController extends Controller
     }
     public function alldataList()
     {
+        ini_set('upload_max_filesize', '200M');
+        ini_set('memory_limit', '-1');
+        ini_set('max_execution_time', 900);
+
         $rawDatas = Rawdata::get()->unique('Ticket ID')->values()->all();
         return Datatables::of($rawDatas)->make(true);
     }
@@ -53,6 +57,7 @@ class RawdataController extends Controller
     {
         ini_set('upload_max_filesize', '200M');
         ini_set('memory_limit', '-1');
+        ini_set('max_execution_time', 900);
         
         Rawdata::truncate();
 

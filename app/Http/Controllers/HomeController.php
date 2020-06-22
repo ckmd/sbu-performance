@@ -34,6 +34,7 @@ class HomeController extends Controller
     {
         ini_set('upload_max_filesize', '200M');
         ini_set('memory_limit', '-1');
+        ini_set('max_execution_time', 900);
 
         $kpi = 480;
         if($request->sbu == ""){

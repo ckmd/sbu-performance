@@ -38,6 +38,8 @@
     </script>
     <!-- javascript for handling chart JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
     <!-- Chart untuk Year to date -->
     <script>
         var ctx = document.getElementById('yearToDateChart').getContext('2d');
