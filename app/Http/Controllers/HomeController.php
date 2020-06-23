@@ -36,7 +36,7 @@ class HomeController extends Controller
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 900);
 
-        $kpi = 480;
+        $latestKpi = Kpi::orderBy('created_at', 'desc')->first()["Nilai kpi"];
         if($request->sbu == ""){
             return redirect('home');
         }
@@ -62,7 +62,7 @@ class HomeController extends Controller
         // per sbu
         foreach ($groupbyMonth as $key => $gbm){
             $avg = round(collect($gbm->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),2);
-            $kpiVal[] = $kpi;
+            $kpiVal[] = $latestKpi;
             $bulanKe[] = $key;
             $bulanVal[] = $avg;
         }

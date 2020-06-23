@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Dashboard - All Data SBU')
+@section('title', 'All Data SBU')
 
 @section('css')
     <link href="https://cdn.datatables.net/1.10.17/css/jquery.dataTables.min.css" rel="stylesheet">

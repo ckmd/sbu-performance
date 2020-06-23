@@ -24,3 +24,4 @@ Route::post('/home', 'HomeController@message');
 Route::get('alldata', 'RawdataController@alldata')->middleware('auth');
 Route::get('alldata-list', 'RawdataController@alldataList')->middleware('auth');
 Route::resource('rawdata','RawdataController')->middleware('auth');
+Route::resource('kpi','KpiController')->middleware('auth');

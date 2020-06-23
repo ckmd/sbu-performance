@@ -256,6 +256,11 @@ return [
             'url'         => '/alldata',
             'icon'        => 'fa fa-fw fa-file',
         ],
+        [
+            'text'        => 'Set nilai KPI',
+            'url'         => '/kpi',
+            'icon'        => 'fa fa-fw fa-pen',
+        ],
         // [
             //     'text'        => 'pages',
             //     'url'         => 'admin/pages',

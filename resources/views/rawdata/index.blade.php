@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Dashboard - Upload Raw Data')
+@section('title', 'Upload Raw Data')
 
 @section('content')
 <div class="container">
@@ -15,7 +15,7 @@
                         <h3>Upload Raw Data SBU</h3>
                         <form action="{{route('rawdata.store')}}" method="POST" enctype="multipart/form-data">
                             {{csrf_field()}}
-                            <input type="file" class="btn btn-secondary btn-md" name="file">
+                            <input type="file" class="btn btn-secondary btn-md" name="file" required>
                             <button type="submit" class="ml-2 btn btn-secondary"><i class="fa fa-upload"></i><span> Upload</span></button>
                         </form>
                     </div>
