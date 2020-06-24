@@ -11,7 +11,7 @@
                 <p>Menit</p>
             </div>
             <div class="col-md-6">
-                <p>86</p>
+                <p>{{$prcntMingguanKpiNasional}}%</p>
                 <p>Percent</p>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <p>Menit</p>
             </div>
             <div class="col-md-6">
-                <p>86</p>
+                <p>{{$prcntMingguanKpiSBU}}%</p>
                 <p>Percent</p>
             </div>
         </div>

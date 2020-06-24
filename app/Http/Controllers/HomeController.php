@@ -125,6 +125,16 @@ class HomeController extends Controller
         $realisasiHarianKpiNasional = round(collect($nationalHariVal)->avg(),0);
         $realisasiHarianKpiSBU = round(collect($hariVal)->avg(),0);
 
+        // menghitung nilai persentase realisasi kpi nasional dan sbu
+        $prcntBulananKpiNasional = round($latestKpi / $realisasiBulananKpiNasional * 100,0);
+        $prcntBulananKpiSBU = round($latestKpi / $realisasiBulananKpiSBU * 100,0);
+
+        $prcntMingguanKpiNasional = round($latestKpi / $realisasiMingguanKpiNasional * 100,0);
+        $prcntMingguanKpiSBU = round($latestKpi / $realisasiMingguanKpiSBU * 100,0);
+
+        $prcntHarianKpiNasional = round($latestKpi / $realisasiHarianKpiNasional * 100,0);
+        $prcntHarianKpiSBU = round($latestKpi / $realisasiHarianKpiSBU * 100,0);
+
         return view('home',compact(
             'sbu',
             'firstData', 
@@ -135,7 +145,10 @@ class HomeController extends Controller
             'bulanKe','bulanVal', 'nationalBulanVal',
             'realisasiBulananKpiNasional', 'realisasiBulananKpiSBU',
             'realisasiMingguanKpiNasional', 'realisasiMingguanKpiSBU',
-            'realisasiHarianKpiNasional', 'realisasiHarianKpiSBU'
+            'realisasiHarianKpiNasional', 'realisasiHarianKpiSBU',
+            'prcntBulananKpiNasional', 'prcntBulananKpiSBU',
+            'prcntMingguanKpiNasional', 'prcntMingguanKpiSBU',
+            'prcntHarianKpiNasional', 'prcntHarianKpiSBU'
         ));
         // sampe sini, membuat array / object dari hasil rata2
 
