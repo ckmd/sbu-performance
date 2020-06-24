@@ -204,14 +204,14 @@
                     <p>Rawdata SBU yang telah diupload dari {{$firstData}} hingga {{$lastData}}</p>
 
                     @include('dashboard.filterForm')
+                </div>
+            </div>
                     @if($showChart == true)
                     @include('dashboard.yearToDate')
                     @include('dashboard.monthly')
                     @include('dashboard.weekly')
                     @include('dashboard.daily')
                     @endif
-                </div>
-            </div>
         </div>
     </div>
 </div>
