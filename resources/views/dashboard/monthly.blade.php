@@ -7,7 +7,7 @@
         <div class="row">
             <p>Realisasi KPI Secara Nasional</p>
             <div class="col-md-6">
-                <p>600</p>
+                <p>{{$realisasiBulananKpiNasional}}</p>
                 <p>Menit</p>
             </div>
             <div class="col-md-6">
@@ -20,7 +20,7 @@
             <!-- <div id = 'msg'>SBU ... &ensp;</div> -->
             
             <div class="col-md-6">
-                <p>600</p>
+                <p>{{$realisasiBulananKpiSBU}}</p>
                 <p>Menit</p>
             </div>
             <div class="col-md-6">

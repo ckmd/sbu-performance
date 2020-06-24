@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Rawdata;
+use App\Kpi;
 
 class HomeController extends Controller
 {
@@ -32,15 +33,19 @@ class HomeController extends Controller
     }
     public function message(Request $request)
     {
+        // agar dapat mengupload hingga 200MB dan waktu tunggu sampai 900 detik
         ini_set('upload_max_filesize', '200M');
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 900);
 
-        $latestKpi = Kpi::orderBy('created_at', 'desc')->first()["Nilai kpi"];
+        // filter apabila tidak memilih sbu manapun
         if($request->sbu == ""){
             return redirect('home');
         }
         $showChart = true;
+        // mengambil nilai kpi yang terakhir kali dirubah
+        $latestKpi = Kpi::orderBy('created_at', 'desc')->first()["Nilai kpi"];
+
         $firstData = Rawdata::orderBy('Created On', 'asc')->first()["Created On"];
         $lastData = Rawdata::orderBy('Created On', 'desc')->first()["Created On"];
         $sbuRegion = Rawdata::distinct('Region SBU (Terminating) (Address)')->pluck('Region SBU (Terminating) (Address)');
@@ -56,12 +61,12 @@ class HomeController extends Controller
 
         // secara nasional
         foreach ($nationalGroupbyMonth as $key => $gbm){
-            $avg = round(collect($gbm->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),2);
+            $avg = round(collect($gbm->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
             $nationalBulanVal[] = $avg;
         }
         // per sbu
         foreach ($groupbyMonth as $key => $gbm){
-            $avg = round(collect($gbm->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),2);
+            $avg = round(collect($gbm->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
             $kpiVal[] = $latestKpi;
             $bulanKe[] = $key;
             $bulanVal[] = $avg;
@@ -78,12 +83,12 @@ class HomeController extends Controller
         $nationalGroupbyWeek = Rawdata::get()->groupBy('Minggu');
         // secara nasional
         foreach ($nationalGroupbyWeek as $key => $gbw){
-            $avg = round(collect($gbw->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),2);
+            $avg = round(collect($gbw->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
             $nationalMingguVal[] = $avg;
         }
         // per sbu
         foreach ($groupbyWeek as $key => $gbw){
-            $avg = round(collect($gbw->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),2);
+            $avg = round(collect($gbw->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
             $mingguKe[] = $key;
             $mingguVal[] = $avg;
         }
@@ -99,16 +104,26 @@ class HomeController extends Controller
         $nationalGroupbyDay = Rawdata::get()->groupBy('Hari');
         // secara nasional
         foreach ($nationalGroupbyDay as $key => $gbd){
-            $avg = round(collect($gbd->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),2);
+            $avg = round(collect($gbd->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
             $nationalHariVal[] = $avg;
         }
         // per sbu
         foreach ($groupbyDay as $key => $gbd){
-            $avg = round(collect($gbd->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),2);
+            $avg = round(collect($gbd->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
             $hariKe[] = $key;
             $hariVal[] = $avg;
         }
         // end filter per hari
+
+        // menghitung nilai KPI nasional dan sbu
+        $realisasiBulananKpiNasional = round(collect($nationalBulanVal)->avg(),0);
+        $realisasiBulananKpiSBU = round(collect($bulanVal)->avg(),0);
+
+        $realisasiMingguanKpiNasional = round(collect($nationalMingguVal)->avg(),0);
+        $realisasiMingguanKpiSBU = round(collect($mingguVal)->avg(),0);
+
+        $realisasiHarianKpiNasional = round(collect($nationalHariVal)->avg(),0);
+        $realisasiHarianKpiSBU = round(collect($hariVal)->avg(),0);
 
         return view('home',compact(
             'sbu',
@@ -117,10 +132,14 @@ class HomeController extends Controller
             'sbuRegion','showChart',
             'hariKe','hariVal', 'nationalHariVal',
             'mingguKe','mingguVal', 'nationalMingguVal',
-            'bulanKe','bulanVal', 'nationalBulanVal'));
+            'bulanKe','bulanVal', 'nationalBulanVal',
+            'realisasiBulananKpiNasional', 'realisasiBulananKpiSBU',
+            'realisasiMingguanKpiNasional', 'realisasiMingguanKpiSBU',
+            'realisasiHarianKpiNasional', 'realisasiHarianKpiSBU'
+        ));
         // sampe sini, membuat array / object dari hasil rata2
 
-        return array('msg'=> $sbu,'mingguKe' => $mingguKe,'mingguVal' => $mingguVal);
-        return response()->json(array('msg'=> $sbu,'mingguKe' => $mingguKe), 200);
+        // return array('msg'=> $sbu,'mingguKe' => $mingguKe,'mingguVal' => $mingguVal);
+        // return response()->json(array('msg'=> $sbu,'mingguKe' => $mingguKe), 200);
     }
 }

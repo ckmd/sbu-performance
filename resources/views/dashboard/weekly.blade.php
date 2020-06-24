@@ -7,7 +7,7 @@
         <div class="row">
             <p>Realisasi KPI Nasional</p>
             <div class="col-md-6">
-                <p>600</p>
+                <p>{{$realisasiMingguanKpiNasional}}</p>
                 <p>Menit</p>
             </div>
             <div class="col-md-6">
@@ -18,7 +18,7 @@
         <div class="row">
             <p>Realisasi KPI {{$sbu}}</p>                                
             <div class="col-md-6">
-                <p>600</p>
+                <p>{{$realisasiMingguanKpiSBU}}</p>
                 <p>Menit</p>
             </div>
             <div class="col-md-6">
