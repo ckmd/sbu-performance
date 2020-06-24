@@ -6,29 +6,39 @@
             <div class="col-md-9">
                 <canvas id="monthlyChart"></canvas>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 text-center">
                 <div class="row">
-                    <p>Realisasi KPI Secara Nasional</p>
-                    <div class="col-md-6">
-                        <p>{{$realisasiBulananKpiNasional}}</p>
-                        <p>Menit</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p>{{$prcntBulananKpiNasional}}%</p>
-                        <p>Percent</p>
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th colspan="2">Realisasi KPI Secara Nasional</th>
+                            </tr>
+                            <tr>
+                                <td>{{$realisasiBulananKpiNasional}}</td>
+                                <td>{{$prcntBulananKpiNasional}}%</td>
+                            </tr>
+                            <tr>
+                                <td>Menit</td>
+                                <td>Percent</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
                 <div class="row">
-                    <p>Realisasi KPI {{$sbu}}</p>
-                    <!-- <div id = 'msg'>SBU ... &ensp;</div> -->
-                    
-                    <div class="col-md-6">
-                        <p>{{$realisasiBulananKpiSBU}}</p>
-                        <p>Menit</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p>{{$prcntBulananKpiSBU}}%</p>
-                        <p>Percent</p>
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th colspan="2">Realisasi KPI {{$sbu}}</th>
+                            </tr>
+                            <tr>
+                                <td>{{$realisasiBulananKpiSBU}}</td>
+                                <td>{{$prcntBulananKpiSBU}}%</td>
+                            </tr>
+                            <tr>
+                                <td>Menit</td>
+                                <td>Percent</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
