@@ -33,6 +33,11 @@ class HomeController extends Controller
     }
     public function message(Request $request)
     {
+        // get current month name
+        date_default_timezone_set('Asia/Jakarta');
+        $current_month = date('F');
+        $current_month = 'June';
+
         // agar dapat mengupload hingga 200MB dan waktu tunggu sampai 900 detik
         ini_set('upload_max_filesize', '200M');
         ini_set('memory_limit', '-1');
@@ -98,19 +103,20 @@ class HomeController extends Controller
         // filter berdasarkan SBU
         $sbu = $request->sbu;
         $rawdataFilteredBySBU = Rawdata::where('Region SBU (Terminating) (Address)', $sbu)->get();
-        $groupbyDay = $rawdataFilteredBySBU->groupBy('Hari');
+        $groupbyDay = $rawdataFilteredBySBU->where('Bulan',$current_month)->groupBy('Hari');
 
         // data nasional tanpa filter
-        $nationalGroupbyDay = Rawdata::get()->groupBy('Hari');
+        $nationalGroupbyDay = Rawdata::get()->where('Bulan',$current_month)->groupBy('Hari');
         // secara nasional
         foreach ($nationalGroupbyDay as $key => $gbd){
             $avg = round(collect($gbd->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
             $nationalHariVal[] = $avg;
         }
+        
         // per sbu
         foreach ($groupbyDay as $key => $gbd){
             $avg = round(collect($gbd->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
-            $hariKe[] = $key;
+            $hariKe[] = substr((string)$key,0,2);
             $hariVal[] = $avg;
         }
         // end filter per hari
@@ -140,7 +146,7 @@ class HomeController extends Controller
             'firstData', 
             'lastData', 'kpiVal',
             'sbuRegion','showChart',
-            'hariKe','hariVal', 'nationalHariVal',
+            'hariKe','hariVal', 'nationalHariVal','current_month',
             'mingguKe','mingguVal', 'nationalMingguVal',
             'bulanKe','bulanVal', 'nationalBulanVal',
             'realisasiBulananKpiNasional', 'realisasiBulananKpiSBU',

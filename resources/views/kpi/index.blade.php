@@ -14,7 +14,7 @@
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="nilaikpi">Masukkan nilai KPI baru</label>
-                            <input type="number" class="form-control" name="nilaikpi" required>
+                            <input type="number" class="form-control" name="nilaikpi" value="{{$latestKpi}}" required>
                         </div>
                         <button type="submit" class="btn btn-primary"><i class="fa fa-pen"></i><span> Perbarui</span></button>
                     </form>
