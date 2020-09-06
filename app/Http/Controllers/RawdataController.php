@@ -73,11 +73,11 @@ class RawdataController extends Controller
 		// membuat nama file unik
 		$nama_file = rand().$file->getClientOriginalName();
  
-		// upload ke folder file_siswa di dalam folder public
-		$file->move('file_siswa',$nama_file);
+		// upload ke folder file_sbu di dalam folder public
+		$file->move('file_sbu',$nama_file);
  
 		// import data
-		Excel::import(new RawdataImport, public_path('/file_siswa/'.$nama_file));
+		Excel::import(new RawdataImport, public_path('/file_sbu/'.$nama_file));
  
 		// notifikasi dengan session
 		// Session::flash('sukses','Data Siswa Berhasil Diimport!');
@@ -93,7 +93,17 @@ class RawdataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+     public function delete(){
+        ini_set('memory_limit', '-1');
+        $rawdata = Rawdata::all();
+        foreach($rawdata as $item){
+            $item->delete();
+        }
+        return redirect('/alldata');
+     }
+
+     public function show($id)
     {
         //
     }

@@ -36,7 +36,7 @@ class HomeController extends Controller
         // get current month name
         date_default_timezone_set('Asia/Jakarta');
         $current_month = date('F');
-        $current_month = 'June';
+        // $current_month = 'January';
 
         // agar dapat mengupload hingga 200MB dan waktu tunggu sampai 900 detik
         ini_set('upload_max_filesize', '200M');
@@ -108,16 +108,29 @@ class HomeController extends Controller
         // data nasional tanpa filter
         $nationalGroupbyDay = Rawdata::get()->where('Bulan',$current_month)->groupBy('Hari');
         // secara nasional
-        foreach ($nationalGroupbyDay as $key => $gbd){
-            $avg = round(collect($gbd->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
-            $nationalHariVal[] = $avg;
+        $nationalHariVal = [];
+        if($nationalGroupbyDay->count() > 0){
+            foreach ($nationalGroupbyDay as $key => $gbd){
+                $avg = round(collect($gbd->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
+                $nationalHariVal[] = $avg;
+            }
+            $realisasiHarianKpiNasional = round(collect($nationalHariVal)->avg(),0);
+        }else{
+            $realisasiHarianKpiNasional = 1;
         }
         
         // per sbu
-        foreach ($groupbyDay as $key => $gbd){
-            $avg = round(collect($gbd->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
-            $hariKe[] = substr((string)$key,0,2);
-            $hariVal[] = $avg;
+        $hariVal = [];
+        $hariKe = [];
+        if($groupbyDay->count() > 0){
+            foreach ($groupbyDay as $key => $gbd){
+                $avg = round(collect($gbd->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
+                $hariKe[] = substr((string)$key,0,2);
+                $hariVal[] = $avg;
+            }
+            $realisasiHarianKpiSBU = round(collect($hariVal)->avg(),0);
+        }else{
+            $realisasiHarianKpiSBU = 1;
         }
         // end filter per hari
 
@@ -127,9 +140,6 @@ class HomeController extends Controller
 
         $realisasiMingguanKpiNasional = round(collect($nationalMingguVal)->avg(),0);
         $realisasiMingguanKpiSBU = round(collect($mingguVal)->avg(),0);
-
-        $realisasiHarianKpiNasional = round(collect($nationalHariVal)->avg(),0);
-        $realisasiHarianKpiSBU = round(collect($hariVal)->avg(),0);
 
         // menghitung nilai persentase realisasi kpi nasional dan sbu
         $prcntBulananKpiNasional = round($latestKpi / $realisasiBulananKpiNasional * 100,0);

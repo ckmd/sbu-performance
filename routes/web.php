@@ -18,10 +18,16 @@ Route::get('/', function () {
 });
 
 Auth::routes(['register' => false]);
+Route::group(['middleware' => ['auth']], function () {
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/home', 'HomeController@message');
-Route::get('alldata', 'RawdataController@alldata')->middleware('auth');
-Route::get('alldata-list', 'RawdataController@alldataList')->middleware('auth');
-Route::resource('rawdata','RawdataController')->middleware('auth');
-Route::resource('kpi','KpiController')->middleware('auth');
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::post('/home', 'HomeController@message');
+    Route::get('alldata', 'RawdataController@alldata');
+    Route::get('alldata-list', 'RawdataController@alldataList');
+    Route::resource('rawdata','RawdataController');
+    Route::get('/{id}/submit', "JadwalPelaksanaanController@submit");
+    Route::get('download', 'RawdataController@download')->name("rawdata.download");
+    Route::get('delete', 'RawdataController@delete')->name("rawdata.delete");
+    Route::resource('kpi','KpiController');
+
+});
