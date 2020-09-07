@@ -116,7 +116,7 @@ class HomeController extends Controller
             }
             $realisasiHarianKpiNasional = round(collect($nationalHariVal)->avg(),0);
         }else{
-            $realisasiHarianKpiNasional = 1;
+            $realisasiHarianKpiNasional = $latestKpi;
         }
         
         // per sbu
@@ -130,7 +130,7 @@ class HomeController extends Controller
             }
             $realisasiHarianKpiSBU = round(collect($hariVal)->avg(),0);
         }else{
-            $realisasiHarianKpiSBU = 1;
+            $realisasiHarianKpiSBU = $latestKpi;
         }
         // end filter per hari
 
