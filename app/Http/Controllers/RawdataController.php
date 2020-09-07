@@ -33,7 +33,8 @@ class RawdataController extends Controller
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 900);
 
-        $rawDatas = Rawdata::get()->unique('Ticket ID')->values()->all();
+        // $rawDatas = Rawdata::get()->unique('Ticket ID')->values()->all();
+        $rawDatas = Rawdata::all();
         return Datatables::of($rawDatas)->make(true);
     }
 

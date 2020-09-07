@@ -49,7 +49,7 @@
 
          <div class="card-body">
             <a href="{{route('rawdata.download')}}" class="btn btn-success disabled"><i class="fa fa-download"></i><span> Download</span></a>
-            <a href="{{route('rawdata.delete')}}" class="btn btn-danger"><i class="fa fa-trash"></i><span> Hapus Data</span></a>
+            <a href="{{route('rawdata.delete')}}" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus semua rawdata ?');"><i class="fa fa-trash"></i><span> Hapus Data</span></a>
             <br> <br>
             <table class="table table-hover table-bordered" id="table" style="white-space: nowrap;">
                <thead>

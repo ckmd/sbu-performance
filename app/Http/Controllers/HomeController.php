@@ -25,18 +25,33 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $firstData = Rawdata::orderBy('Created On', 'asc')->first()["Created On"];
-        $lastData = Rawdata::orderBy('Created On', 'desc')->first()["Created On"];
-        $sbuRegion = Rawdata::distinct('Region SBU (Terminating) (Address)')->pluck('Region SBU (Terminating) (Address)');
+        // mengambil data awal, data akhir, dan nama SBU secara dinamis
+        $firstData = $this->getFirstData();
+        $lastData = $this->getLastData();
+        $sbuRegion = $this->getSBUName();
         $showChart = false;
+
         return view('home',compact('firstData', 'lastData', 'sbuRegion','showChart'));
     }
+    
+    public function getFirstData(){
+        return Rawdata::orderBy('Created On', 'asc')->first()["Created On"];
+    }
+
+    public function getLastData(){
+        return Rawdata::orderBy('Created On', 'desc')->first()["Created On"];
+    }
+
+    public function getSBUName(){
+        return Rawdata::distinct('Region SBU (Terminating) (Address)')->pluck('Region SBU (Terminating) (Address)');
+    }
+
     public function message(Request $request)
     {
         // get current month name
         date_default_timezone_set('Asia/Jakarta');
         $current_month = date('F');
-        // $current_month = 'January';
+        $current_month = 'January';
 
         // agar dapat mengupload hingga 200MB dan waktu tunggu sampai 900 detik
         ini_set('upload_max_filesize', '200M');
@@ -48,21 +63,55 @@ class HomeController extends Controller
             return redirect('home');
         }
         $showChart = true;
+
         // mengambil nilai kpi yang terakhir kali dirubah
         $latestKpi = Kpi::orderBy('created_at', 'desc')->first()["Nilai kpi"];
 
-        $firstData = Rawdata::orderBy('Created On', 'asc')->first()["Created On"];
-        $lastData = Rawdata::orderBy('Created On', 'desc')->first()["Created On"];
-        $sbuRegion = Rawdata::distinct('Region SBU (Terminating) (Address)')->pluck('Region SBU (Terminating) (Address)');
+        // mengambil data awal, data akhir, dan nama SBU secara dinamis
+        $firstData = $this->getFirstData();
+        $lastData = $this->getLastData();
+        $sbuRegion = $this->getSBUName();
 
-        // start filter per bulan
-        // filter per bulan berdasarkan SBU
+        // mengambil setiap variabel dari request
         $sbu = $request->sbu;
-        $rawdataFilteredBySBU = Rawdata::where('Region SBU (Terminating) (Address)', $sbu)->get();
+        $start = $request->start;
+        $end = $request->end;
+        
+        // $rawdataFilteredBySBU = Rawdata::where('Region SBU (Terminating) (Address)', $sbu)->get();
+        // cek kondisi sesuai dengan filter date
+        // apabila terdapat tanggal start dan tanggal end
+        if(!is_null($start) && !is_null($end)){
+            $rawdataFilteredBySBU = Rawdata::where('Region SBU (Terminating) (Address)', $sbu)
+                ->where('Created On','>',$start)
+                ->where('Created On','<',$end)
+                ->OrderBy('Created On','asc')
+                ->get();
+        }
+        // apabila hanya terdapat tanggal start, maka mengambil sampai data terakhir
+        else if(!is_null($start)){
+            $rawdataFilteredBySBU = Rawdata::where('Region SBU (Terminating) (Address)', $sbu)
+                ->where('Created On','>',$start)
+                ->OrderBy('Created On','asc')
+                ->get();
+        }
+        // apabila hanya terdapat tanggal end, maka mengambil sampai data terawal
+        else if(!is_null($end)){
+            $rawdataFilteredBySBU = Rawdata::where('Region SBU (Terminating) (Address)', $sbu)
+                ->where('Created On','<',$end)
+                ->OrderBy('Created On','asc')
+                ->get();
+        }
+        // apabila tidak terdapat start dan end, maka mengambil dari data terawal sampai dengan data terakhir
+        else{
+            $rawdataFilteredBySBU = Rawdata::OrderBy('Created On','asc')
+                ->where('Region SBU (Terminating) (Address)', $sbu)
+                ->get();
+        }
+
         $groupbyMonth = $rawdataFilteredBySBU->groupBy('Bulan');
 
         // data per bulan nasional tanpa filter
-        $nationalGroupbyMonth = Rawdata::get()->groupBy('Bulan');
+        $nationalGroupbyMonth = Rawdata::OrderBy('Created On','asc')->get()->groupBy('Bulan');
 
         // secara nasional
         foreach ($nationalGroupbyMonth as $key => $gbm){
@@ -81,11 +130,11 @@ class HomeController extends Controller
         // start filter per minggu
         // filter berdasarkan SBU
         $sbu = $request->sbu;
-        $rawdataFilteredBySBU = Rawdata::where('Region SBU (Terminating) (Address)', $sbu)->get();
+        $rawdataFilteredBySBU = Rawdata::where('Region SBU (Terminating) (Address)', $sbu)->OrderBy('Created On','asc')->get();
         $groupbyWeek = $rawdataFilteredBySBU->groupBy('Minggu');
 
         // data nasional tanpa filter
-        $nationalGroupbyWeek = Rawdata::get()->groupBy('Minggu');
+        $nationalGroupbyWeek = Rawdata::OrderBy('Created On','asc')->get()->groupBy('Minggu');
         // secara nasional
         foreach ($nationalGroupbyWeek as $key => $gbw){
             $avg = round(collect($gbw->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
@@ -102,11 +151,11 @@ class HomeController extends Controller
         // start filter per hari
         // filter berdasarkan SBU
         $sbu = $request->sbu;
-        $rawdataFilteredBySBU = Rawdata::where('Region SBU (Terminating) (Address)', $sbu)->get();
+        $rawdataFilteredBySBU = Rawdata::OrderBy('Created On','asc')->where('Region SBU (Terminating) (Address)', $sbu)->get();
         $groupbyDay = $rawdataFilteredBySBU->where('Bulan',$current_month)->groupBy('Hari');
 
         // data nasional tanpa filter
-        $nationalGroupbyDay = Rawdata::get()->where('Bulan',$current_month)->groupBy('Hari');
+        $nationalGroupbyDay = Rawdata::OrderBy('Created On','asc')->get()->where('Bulan',$current_month)->groupBy('Hari');
         // secara nasional
         $nationalHariVal = [];
         if($nationalGroupbyDay->count() > 0){
