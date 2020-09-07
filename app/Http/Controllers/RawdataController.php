@@ -59,8 +59,6 @@ class RawdataController extends Controller
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 900);
         
-        Rawdata::truncate();
-
 		// validasi
 		// $this->validate($request, [
         //     'file' => 'required|mimes:csv,xls,xlsx'
