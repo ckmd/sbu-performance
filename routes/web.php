@@ -24,10 +24,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/home', 'HomeController@message');
     Route::get('alldata', 'RawdataController@alldata');
     Route::get('alldata-list', 'RawdataController@alldataList');
-    Route::resource('rawdata','RawdataController');
-    Route::get('/{id}/submit', "JadwalPelaksanaanController@submit");
     Route::get('download', 'RawdataController@download')->name("rawdata.download");
     Route::get('delete', 'RawdataController@delete')->name("rawdata.delete");
+
+    Route::resource('rawdata','RawdataController');
     Route::resource('kpi','KpiController');
 
 });
