@@ -11,13 +11,17 @@ class MailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function send(Request $request)
+    public function send()
     {
         $details = [
             'title' => 'Mail from SBU Perfromance Demo',
-            'body' => 'This mail will contain attachment'
+            'body' => 'This mail will contain attachment',
+            'subject' => 'subject email ke rachmad newest',
+            'attachment' => './pdf/Rekap Nasional.pdf',
+            'targetEmail' => 'rachmad.eepis@gmail.com'
+
         ];
-        \Mail::to('rachmad.eepis@gmail.com')->send(new \App\Mail\SbuMail($details));
+        \Mail::send(new \App\Mail\SbuMail($details));
         echo 'mail has been sent !';
     }
 

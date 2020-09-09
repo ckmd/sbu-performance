@@ -30,5 +30,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('rawdata','RawdataController');
     Route::resource('kpi','KpiController');
 
-    Route::post('/send-mail', 'MailController@send')->name("mail.send");
+    Route::get('/send-mail', 'MailController@send')->name("mail.send");
 });

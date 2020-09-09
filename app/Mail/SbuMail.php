@@ -31,8 +31,13 @@ class SbuMail extends Mailable
      */
     public function build()
     {
+        $targetEmail = $this->details['targetEmail'];
+        $subject = $this->details['subject'];
+        $attachment = $this->details['attachment'];
         // return $this->view('view.name');
-        $location = asset('images/icon.png');
-        return $this->subject('Subject mail from bagus prayogo')->attach('./images/icon.png')->view('email.index');
+        return $this->to($targetEmail)
+            ->subject($subject)
+            ->attach($attachment)
+            ->view('email.index');
     }
 }
