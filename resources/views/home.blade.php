@@ -207,6 +207,7 @@
                 </div>
             </div>
                     @if($showChart == true)
+                    @include('dashboard.header')
                     @include('dashboard.yearToDate')
                     @include('dashboard.monthly')
                     @include('dashboard.weekly')

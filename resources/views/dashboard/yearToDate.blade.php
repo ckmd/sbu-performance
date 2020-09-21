@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header">Year to date Monitoring - {{$sbu}}</div>
+    <div class="card-header">Year to date Monitoring</div>
 
     <div class="card-body">
         <div class="row">

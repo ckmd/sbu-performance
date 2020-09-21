@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header">Daily Monitoring bulan {{$current_month}} - {{$sbu}}</div>
+    <div class="card-header">Daily Monitoring</div>
 
     <div class="card-body">
         <div class="row">

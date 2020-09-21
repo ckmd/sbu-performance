@@ -51,6 +51,7 @@ class HomeController extends Controller
         // get current month name
         date_default_timezone_set('Asia/Jakarta');
         $current_month = date('F');
+        $now = date('Y-m-d H:i:s');
         // $current_month = 'January';
 
         // agar dapat mengupload hingga 200MB dan waktu tunggu sampai 900 detik
@@ -201,7 +202,7 @@ class HomeController extends Controller
         $prcntHarianKpiSBU = round($latestKpi / $realisasiHarianKpiSBU * 100,0);
 
         return view('home',compact(
-            'sbu',
+            'sbu','start','end','now',
             'firstData', 
             'lastData', 'kpiVal',
             'sbuRegion','showChart',
