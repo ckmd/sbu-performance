@@ -81,8 +81,10 @@
 
             <div class="content">
                 <img src="{{asset('images/icon.png')}}" alt="ICON+ Logo" style="opacity: 0.8" width="50%" height="50%">
-                <h1>SBU Performance</h1>
-                <h3>PT Indonesia Comnets Plus</h3>
+                <strong>
+                    <h1>MORE PERFECT</h1>
+                    <h2>Aplikasi Monitoring & Reporting Performance Corrective Maintenance</h2>
+                </strong>
 
                 <!-- <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>

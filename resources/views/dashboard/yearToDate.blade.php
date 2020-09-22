@@ -12,20 +12,20 @@
             <thead bgcolor="#eee">
                 <tr>
                     <th>&ensp;</th>
-                    @foreach($bulanKe as $key => $value)
+                    @foreach($ytdBulanKe as $key => $value)
                     <th>{{$value}}</th>
                     @endforeach
                 </tr>
             </thead>
             <tr>
                 <td style="text-align:left">Nasional</td>
-                @foreach($nationalBulanVal as $key => $value)
+                @foreach($ytdNasionalVal as $key => $value)
                 <td>{{$value}}</td>
                 @endforeach
             </tr>
             <tr>
                 <td style="text-align:left">{{$sbu}}</td>
-                @foreach($bulanVal as $key => $value)
+                @foreach($ytdSBUVal as $key => $value)
                 <td>{{$value}}</td>
                 @endforeach
             </tr>

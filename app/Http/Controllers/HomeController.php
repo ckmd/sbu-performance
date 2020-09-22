@@ -50,9 +50,8 @@ class HomeController extends Controller
     {
         // get current month name
         date_default_timezone_set('Asia/Jakarta');
-        $current_month = date('F');
+        // $current_month = date('F');
         $now = date('Y-m-d H:i:s');
-        // $current_month = 'January';
 
         // agar dapat mengupload hingga 200MB dan waktu tunggu sampai 900 detik
         ini_set('upload_max_filesize', '200M');
@@ -110,12 +109,33 @@ class HomeController extends Controller
             $rawdataFilteredBySBUdanTanggal = $rawdataFilteredBySBU;
             $rawdataOriginalFilteredTanggal = $rawdataOriginal;
         }
+        $latestMonth = $rawdataFilteredBySBUdanTanggal->last()->Bulan;
 
         $groupbyMonth = $rawdataFilteredBySBUdanTanggal->groupBy('Bulan');
 
         // data per bulan nasional tanpa filter
         $nationalGroupbyMonth = $rawdataOriginalFilteredTanggal->groupBy('Bulan');
 
+        // Yeartodate
+
+        $accumulativeCount = 0;
+        $accumulativeTime = 0;
+        foreach ($nationalGroupbyMonth as $key => $gbm){
+            $accumulativeCount += $gbm->count();
+            $accumulativeTime += collect($gbm->pluck('Interference Net Duration (DurationId) (Duration)'))->sum();
+            $ytdNasionalVal[] = round($accumulativeTime / $accumulativeCount,0);
+        }
+        // per sbu
+        $accumulativeCount = 0;
+        $accumulativeTime = 0;
+        foreach ($groupbyMonth as $key => $gbm){
+            $accumulativeCount += $gbm->count();
+            $accumulativeTime += collect($gbm->pluck('Interference Net Duration (DurationId) (Duration)'))->sum();
+            $ytdBulanKe[] = $key;
+            $ytdSBUVal[] = round($accumulativeTime / $accumulativeCount,0);
+        }
+
+        // Monthly
         // secara nasional
         foreach ($nationalGroupbyMonth as $key => $gbm){
             $avg = round(collect($gbm->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
@@ -135,7 +155,7 @@ class HomeController extends Controller
         $groupbyWeek = $rawdataFilteredBySBUdanTanggal->groupBy('Minggu');
 
         // data nasional tanpa filter
-        $nationalGroupbyWeek = $rawdataOriginal->groupBy('Minggu');
+        $nationalGroupbyWeek = $rawdataOriginalFilteredTanggal->groupBy('Minggu');
         // secara nasional
         foreach ($nationalGroupbyWeek as $key => $gbw){
             $avg = round(collect($gbw->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
@@ -151,12 +171,10 @@ class HomeController extends Controller
 
         // start filter per hari
         // filter berdasarkan SBU
-        // $groupbyDay = $rawdataFilteredBySBUdanTanggal->where('Bulan',$current_month)->groupBy('Hari');
-        $groupbyDay = $rawdataFilteredBySBUdanTanggal->groupBy('Hari');
+        $groupbyDay = $rawdataFilteredBySBUdanTanggal->where('Bulan',$latestMonth)->groupBy('Hari');
 
         // data nasional tanpa filter
-        // $nationalGroupbyDay = $rawdataOriginal->where('Bulan',$current_month)->groupBy('Hari');
-        $nationalGroupbyDay = $rawdataOriginal->groupBy('Hari');
+        $nationalGroupbyDay = $rawdataOriginalFilteredTanggal->where('Bulan',$latestMonth)->groupBy('Hari');
         // secara nasional
         $nationalHariVal = [];
         if($nationalGroupbyDay->count() > 0){
@@ -202,13 +220,14 @@ class HomeController extends Controller
         $prcntHarianKpiSBU = round($latestKpi / $realisasiHarianKpiSBU * 100,0);
 
         return view('home',compact(
-            'sbu','start','end','now',
-            'firstData', 
+            'sbu','start','end','now', 'latestMonth',
+            'firstData',
             'lastData', 'kpiVal',
             'sbuRegion','showChart',
-            'hariKe','hariVal', 'nationalHariVal','current_month',
+            'hariKe','hariVal', 'nationalHariVal',
             'mingguKe','mingguVal', 'nationalMingguVal',
             'bulanKe','bulanVal', 'nationalBulanVal',
+            'ytdBulanKe', 'ytdSBUVal', 'ytdNasionalVal',
             'realisasiBulananKpiNasional', 'realisasiBulananKpiSBU',
             'realisasiMingguanKpiNasional', 'realisasiMingguanKpiSBU',
             'realisasiHarianKpiNasional', 'realisasiHarianKpiSBU',

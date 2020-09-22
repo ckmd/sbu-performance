@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header">Daily Monitoring</div>
+    <div class="card-header">Daily Monitoring Bulan {{ $latestMonth }}</div>
 
     <div class="card-body">
         <div class="row">

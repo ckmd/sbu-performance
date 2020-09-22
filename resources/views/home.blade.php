@@ -50,21 +50,21 @@
             // The data for our dataset
             data: {
                 // labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                labels: <?php echo json_encode($bulanKe ?? '');?>,
+                labels: <?php echo json_encode($ytdBulanKe ?? '');?>,
                 datasets: [
                 {
                     label: 'Nasional',
                     lineTension: 0,
                     backgroundColor: 'transparent',
                     borderColor: 'rgb(255, 99, 132)',
-                    data: <?php echo json_encode($nationalBulanVal ?? ''); ?>,
+                    data: <?php echo json_encode($ytdNasionalVal ?? ''); ?>,
                 }, 
                 {
                     label: <?php echo json_encode($sbu ?? ''); ?>,
                     lineTension: 0,
                     backgroundColor: 'transparent',
                     borderColor: 'rgb(99, 255, 132)',
-                    data: <?php echo json_encode($bulanVal ?? ''); ?>
+                    data: <?php echo json_encode($ytdSBUVal ?? ''); ?>
                 },
                 {
                     label: 'KPI',
