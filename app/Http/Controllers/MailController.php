@@ -18,7 +18,7 @@ class MailController extends Controller
             'body' => 'This mail will contain attachment',
             'subject' => 'subject email ke rachmad newest',
             'attachment' => './pdf/Rekap Nasional.pdf',
-            'targetEmail' => 'bagus.prayogo@iconpln.co.id'
+            'targetEmail' => 'rachmad.eepis@gmail.com'
 
         ];
         \Mail::send(new \App\Mail\SbuMail($details));
