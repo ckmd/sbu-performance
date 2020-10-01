@@ -13,17 +13,18 @@ class MailController extends Controller
      */
     public function send(Request $request)
     {
-        $penerima = $request->penerima;
+        $penerima       = $request->penerima;
+        $totalPenerima  = count($penerima);
         foreach($penerima as $kPenerima => $vPenerima){
             $details = [
-                'body' => $request->message,
-                'subject' => $request->subject,
-                'attachment' => './pdf/Rekap Nasional.pdf',
-                'targetEmail' => 'rachmad.eepis@gmail.com'    
+                'body'          => $request->message,
+                'subject'       => $request->subject,
+                'attachment'    => './pdf/Rekap Nasional.pdf',
+                'targetEmail'   => 'rachmad.eepis@gmail.com'
             ];
             \Mail::send(new \App\Mail\SbuMail($details));
-            echo 'mail has been sent !';
         }
+        return redirect('/home')->with(['success' => 'Pesan Berhasil Dikirim ke '. $totalPenerima .' Penerima']);
     }
 
     public function index()

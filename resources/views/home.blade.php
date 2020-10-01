@@ -189,6 +189,14 @@
     </script>
 @stop
 @section('content')
+
+@if ($message = Session::get('success'))
+    <div class="alert alert-success alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button> 
+        <strong>{{ $message }}</strong>
+    </div>
+@endif
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -210,13 +218,13 @@
                     @include('dashboard.filterForm')
                 </div>
             </div>
-                    @if($showChart == true)
-                    @include('dashboard.header')
-                    @include('dashboard.yearToDate')
-                    @include('dashboard.monthly')
-                    @include('dashboard.weekly')
-                    @include('dashboard.daily')
-                    @endif
+            @if($showChart == true)
+            @include('dashboard.header')
+            @include('dashboard.yearToDate')
+            @include('dashboard.monthly')
+            @include('dashboard.weekly')
+            @include('dashboard.daily')
+            @endif
         </div>
     </div>
 </div>

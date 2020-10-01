@@ -6,6 +6,6 @@
     <title>More Perfect</title>
 </head>
 <body>
-    <p>{{{ $details['body'] }}}</p>
+    {!! $details['body'] !!}
 </body>
 </html>
