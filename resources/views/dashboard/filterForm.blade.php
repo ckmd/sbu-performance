@@ -1,5 +1,5 @@
 <!-- <form id="queryForm" action=""> -->
-<form action="/home" id="" method="POST"  enctype="multipart/form-data">
+<form action="{{route('home.post')}}" id="" method="POST"  enctype="multipart/form-data">
 {{csrf_field()}}
     <div class="row">
         <div class="col-md-4">
