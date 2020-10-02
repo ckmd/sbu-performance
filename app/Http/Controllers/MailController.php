@@ -14,11 +14,11 @@ class MailController extends Controller
     public function send()
     {
         $details = [
-            'title' => 'Mail from SBU Perfromance Demo',
+            'title' => 'Mail from More Perfect',
             'body' => 'This mail will contain attachment',
-            'subject' => 'subject email ke rachmad newest',
+            'subject' => 'subject email ke bagus prayogo',
             'attachment' => './pdf/Rekap Nasional.pdf',
-            'targetEmail' => 'rachmad.eepis@gmail.com'
+            'targetEmail' => 'bagus.prayogo@iconpln.co.id'
 
         ];
         \Mail::send(new \App\Mail\SbuMail($details));
