@@ -21,7 +21,7 @@ Auth::routes(['register' => false]);
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::post('/home', 'HomeController@message');
+    Route::post('/home', 'HomeController@message')->name('home.post');
     Route::get('alldata', 'RawdataController@alldata');
     Route::get('alldata-list', 'RawdataController@alldataList');
     Route::get('download', 'RawdataController@download')->name("rawdata.download");
@@ -30,5 +30,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('rawdata','RawdataController');
     Route::resource('kpi','KpiController');
 
-    Route::get('/send-mail', 'MailController@send')->name("mail.send");
+    Route::post('/send-mail', 'MailController@send')->name("mail.send");
 });

@@ -11,18 +11,20 @@ class MailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function send()
+    public function send(Request $request)
     {
-        $details = [
-            'title' => 'Mail from More Perfect',
-            'body' => 'This mail will contain attachment',
-            'subject' => 'subject email ke bagus prayogo',
-            'attachment' => './pdf/Rekap Nasional.pdf',
-            'targetEmail' => 'bagus.prayogo@iconpln.co.id'
-
-        ];
-        \Mail::send(new \App\Mail\SbuMail($details));
-        echo 'mail has been sent !';
+        $penerima       = $request->penerima;
+        $totalPenerima  = count($penerima);
+        foreach($penerima as $kPenerima => $vPenerima){
+            $details = [
+                'body'          => $request->message,
+                'subject'       => $request->subject,
+                'attachment'    => './pdf/Rekap Nasional.pdf',
+                'targetEmail'   => 'rachmad.eepis@gmail.com'
+            ];
+            \Mail::send(new \App\Mail\SbuMail($details));
+        }
+        return redirect('/home')->with(['success' => 'Pesan Berhasil Dikirim ke '. $totalPenerima .' Penerima']);
     }
 
     public function index()
