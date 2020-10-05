@@ -231,6 +231,7 @@ return [
     */
 
     'menu' => [
+        ['header' => 'SBU Performance'],
         [
             'text' => 'search',
             'search' => true,
@@ -247,20 +248,31 @@ return [
             'icon'        => 'fa fa-fw fa-table',
         ],
         [
+            'can'         => 'isSuperadmin',
             'text'        => 'Upload Raw Data SBU',
             'url'         => '/rawdata',
             'icon'        => 'fa fa-fw fa-upload',
         ],
         [
+            'can'         => 'isSuperadmin',
+            'text'        => 'View All Recipient',
+            'url'         => '/recipient',
+            'icon'        => 'fa fa-fw fa-user',
+        ],
+        [
+            'can'         => 'isSuperadmin',
             'text'        => 'View All Data SBU',
             'url'         => '/alldata',
             'icon'        => 'fa fa-fw fa-file',
         ],
         [
+            'can'         => 'isSuperadmin',
             'text'        => 'Set nilai KPI',
             'url'         => '/kpi',
             'icon'        => 'fa fa-fw fa-pen',
         ],
+        // ['header' => 'Daily Report'],
+        // ['header' => 'Serpo Performance'],
         // [
             //     'text'        => 'pages',
             //     'url'         => 'admin/pages',
@@ -268,7 +280,6 @@ return [
             //     'label'       => 4,
             //     'label_color' => 'success',
             // ],
-        // ['header' => 'account_settings'],
         // [
         //     'text' => 'profile',
         //     'url'  => 'admin/settings',

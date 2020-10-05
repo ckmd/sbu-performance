@@ -20,15 +20,20 @@ Route::get('/', function () {
 Auth::routes(['register' => false]);
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::group(['middleware' => ['role']], function () {
+
+        Route::resource('rawdata','RawdataController');
+        Route::resource('kpi','KpiController');
+        Route::resource('recipient','recipientController');
+
+        Route::get('alldata', 'RawdataController@alldata');
+        Route::get('alldata-list', 'RawdataController@alldataList');
+        Route::get('download', 'RawdataController@download')->name("rawdata.download");
+        Route::get('delete', 'RawdataController@delete')->name("rawdata.delete");
+
+        Route::post('/send-mail', 'MailController@send')->name("mail.send");
+    });
+
     Route::get('/home', 'HomeController@index')->name('home');
     Route::post('/home', 'HomeController@message')->name('home.post');
-    Route::get('alldata', 'RawdataController@alldata');
-    Route::get('alldata-list', 'RawdataController@alldataList');
-    Route::get('download', 'RawdataController@download')->name("rawdata.download");
-    Route::get('delete', 'RawdataController@delete')->name("rawdata.delete");
-
-    Route::resource('rawdata','RawdataController');
-    Route::resource('kpi','KpiController');
-
-    Route::post('/send-mail', 'MailController@send')->name("mail.send");
 });
