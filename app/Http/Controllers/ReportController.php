@@ -3,31 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PDF;
 
-class MailController extends Controller
+class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function send(Request $request)
-    {
-        $file           = $request->file('attachment');
-        $penerima       = $request->penerima;
-        $totalPenerima  = count($penerima);
-        foreach($penerima as $kPenerima => $vPenerima){
-            $details = [
-                'body'          => $request->message,
-                'subject'       => $request->subject,
-                'attachment'    => $file,
-                'targetEmail'   => 'rachmad.eepis@gmail.com'
-            ];
-            \Mail::send(new \App\Mail\SbuMail($details));
-        }
-        return redirect('/home')->with(['success' => 'Pesan Berhasil Dikirim ke '. $totalPenerima .' Penerima']);
-    }
+    public function reportPdf(){
+        $pegawai = Pegawai::all();
 
+        $pdf = PDF::loadview('pegawai_pdf',['pegawai'=>$pegawai]);
+        return $pdf->download('laporan-pegawai-pdf');        
+    }
     public function index()
     {
         //

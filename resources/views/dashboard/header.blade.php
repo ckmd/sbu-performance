@@ -28,7 +28,7 @@
                 </table>
             </div>
         </div>
-        <button class="btn btn-success" disabled="disabled"><i class="fa fa-download"></i> <span> Download to PDF</span></button>
+        <button class="btn btn-success" onclick="window.print()"><i class="fa fa-download"></i> <span> Download to PDF</span></button>
         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalMail"><i class="fa fa-envelope"></i> <span> Send PDF to SBU</span></button>
     </div>
 </div>
@@ -56,12 +56,16 @@
                         @endfor
                     </div>
                     <div class="form-group">
-                        <label for="subject" class="col-form-label">Subject :</label>
+                        <label for="subject" class="col-form-label">Subject* :</label>
                         <input type="text" class="form-control" id="subject" name="subject">
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="col-form-label">Message :</label>
+                        <label for="message-text" class="col-form-label">Message* :</label>
                         <textarea class="form-control" id="message-text" name="message"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="attachment" class="col-form-label">Attachment* :</label>
+                        <input type="file" class="form-control" id="attachment" name="attachment">
                     </div>
                 </div>
                 <div class="modal-footer">
