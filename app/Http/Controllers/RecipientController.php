@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Sbu;
 
 class RecipientController extends Controller
 {
@@ -13,7 +15,9 @@ class RecipientController extends Controller
      */
     public function index()
     {
-        return 'hi';
+        $sbus = Sbu::all();
+        $recipients = User::where('role_id',2)->orderBy('name')->get();
+        return view('recipient.index', compact('recipients', 'sbus'));
         //
     }
 

@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('rawdata','RawdataController');
         Route::resource('kpi','KpiController');
         Route::resource('recipient','recipientController');
+        Route::resource('user','userController');
 
         Route::get('alldata', 'RawdataController@alldata');
         Route::get('alldata-list', 'RawdataController@alldataList');
@@ -32,6 +33,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('delete', 'RawdataController@delete')->name("rawdata.delete");
 
         Route::post('/send-mail', 'MailController@send')->name("mail.send");
+        
+        Route::get('recipient/delete/{id}', 'UserController@destroy')->name("user.delete");
+
     });
 
     Route::get('/home', 'HomeController@index')->name('home');
