@@ -33,11 +33,14 @@ class SbuMail extends Mailable
     {
         $targetEmail = $this->details['targetEmail'];
         $subject = $this->details['subject'];
-        $attachment = $this->details['attachment'];
         // return $this->view('view.name');
         return $this->to($targetEmail)
             ->subject($subject)
-            ->attach($attachment)
+            ->attach($this->details['attachment']->getRealPath(),
+                [
+                    'as' => $this->details['attachment']->getClientOriginalName(),
+                    'mime' => $this->details['attachment']->getClientMimeType(),
+                ])
             ->view('email.index');
     }
 }

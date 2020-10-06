@@ -3,33 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Sbu;
 
-class MailController extends Controller
+class RecipientController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function send(Request $request)
-    {
-        $file           = $request->file('attachment');
-        $penerima       = $request->penerima;
-        $totalPenerima  = count($penerima);
-        foreach($penerima as $kPenerima => $vPenerima){
-            $details = [
-                'body'          => $request->message,
-                'subject'       => $request->subject,
-                'attachment'    => $file,
-                'targetEmail'   => 'rachmad.eepis@gmail.com'
-            ];
-            \Mail::send(new \App\Mail\SbuMail($details));
-        }
-        return redirect('/home')->with(['success' => 'Pesan Berhasil Dikirim ke '. $totalPenerima .' Penerima']);
-    }
-
     public function index()
     {
+        $sbus = Sbu::all();
+        $recipients = User::where('role_id',2)->orderBy('name')->get();
+        return view('recipient.index', compact('recipients', 'sbus'));
         //
     }
 
