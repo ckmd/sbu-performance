@@ -21,7 +21,7 @@ class MailController extends Controller
                 'body'          => $request->message,
                 'subject'       => $request->subject,
                 'attachment'    => $file,
-                'targetEmail'   => 'rachmad.eepis@gmail.com'
+                'targetEmail'   => $vPenerima
             ];
             \Mail::send(new \App\Mail\SbuMail($details));
         }

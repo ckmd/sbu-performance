@@ -48,24 +48,24 @@
                     {{csrf_field()}}
                     <div class="form-group">
                         <label class="col-form-label">Recipient List :</label>
-                        @for($i = 0; $i < 5; $i++)
+                        @foreach ($recipients as $item)
                         <div class="form-check">
-                            <input class="form-check-input" name="penerima[]" type="checkbox" id="inlineCheckbox{{ $i }}" value="option{{ $i }}">
-                            <label class="form-check-label" for="inlineCheckbox{{ $i }}">Penerima {{ $i }}</label>
+                            <input class="form-check-input" name="penerima[]" type="checkbox" id="inlineCheckbox{{ $item->id }}" value="{{ $item->email }}">
+                            <label class="form-check-label" for="inlineCheckbox{{ $item->id }}">{{ $item->email }}</label>
                         </div>
-                        @endfor
+                        @endforeach
                     </div>
                     <div class="form-group">
                         <label for="subject" class="col-form-label">Subject* :</label>
-                        <input type="text" class="form-control" id="subject" name="subject">
+                        <input type="text" class="form-control" id="subject" name="subject" required>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Message* :</label>
-                        <textarea class="form-control" id="message-text" name="message"></textarea>
+                        <textarea class="form-control" id="message-text" name="message" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="attachment" class="col-form-label">Attachment* :</label>
-                        <input type="file" class="form-control" id="attachment" name="attachment">
+                        <input type="file" class="form-control" id="attachment" name="attachment" required>
                     </div>
                 </div>
                 <div class="modal-footer">
