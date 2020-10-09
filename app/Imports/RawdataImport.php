@@ -16,6 +16,7 @@ class RawdataImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         $createdOn = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['created_on']);
+        $createdOnPlusOneDay = $createdOn->modify('+1 day');
         // $reader->;
         return new Rawdata([
             'Ticket ID' => $row['ticket_id'],
@@ -48,7 +49,7 @@ class RawdataImport implements ToModel, WithHeadingRow
             'Status Reason' => $row['status_reason'], 
             'Status' => $row['status'],
             'Bulan' => date_format($createdOn, "F"),
-            'Minggu' => date_format($createdOn, "W"),
+            'Minggu' => date_format($createdOnPlusOneDay, "W"),
             'Hari' => date_format($createdOn, "d-m-Y")
         ]);
     }

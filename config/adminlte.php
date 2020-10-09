@@ -231,45 +231,51 @@ return [
     */
 
     'menu' => [
-        ['header' => 'SBU Performance'],
+        // ['header' => 'SBU Performance'],
+        // [
+        //     'text' => 'search',
+        //     'search' => true,
+        //     'topnav' => true,
+        // ],
+        // [
+        //     'text' => 'blog',
+        //     'url'  => 'admin/blog',
+        //     'can'  => 'manage-blog',
+        // ],
         [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'Dashboard',
-            'url'         => '/home',
-            'icon'        => 'fa fa-fw fa-table',
-        ],
-        [
-            'can'         => 'isSuperadmin',
-            'text'        => 'Upload Raw Data SBU',
-            'url'         => '/rawdata',
-            'icon'        => 'fa fa-fw fa-upload',
-        ],
-        [
-            'can'         => 'isSuperadmin',
-            'text'        => 'View All Recipient',
-            'url'         => '/recipient',
-            'icon'        => 'fa fa-fw fa-user',
-        ],
-        [
-            'can'         => 'isSuperadmin',
-            'text'        => 'View All Data SBU',
-            'url'         => '/alldata',
-            'icon'        => 'fa fa-fw fa-file',
-        ],
-        [
-            'can'         => 'isSuperadmin',
-            'text'        => 'Set nilai KPI',
-            'url'         => '/kpi',
-            'icon'        => 'fa fa-fw fa-pen',
+            'text'    => 'SBU Performance',
+            // 'icon'    => 'fas fa-fw fa-calendar',
+            'submenu' => [
+                    [
+                        'text'        => 'Dashboard',
+                        'url'         => '/home',
+                        'icon'        => 'fa fa-fw fa-table',
+                    ],
+                    [
+                        'can'         => 'isSuperadmin',
+                        'text'        => 'Upload Raw Data SBU',
+                        'url'         => '/rawdata',
+                        'icon'        => 'fa fa-fw fa-upload',
+                    ],
+                    [
+                        'can'         => 'isSuperadmin',
+                        'text'        => 'View All Recipient',
+                        'url'         => '/recipient',
+                        'icon'        => 'fa fa-fw fa-user',
+                    ],
+                    [
+                        'can'         => 'isSuperadmin',
+                        'text'        => 'View All Data SBU',
+                        'url'         => '/alldata',
+                        'icon'        => 'fa fa-fw fa-file',
+                    ],
+                    [
+                        'can'         => 'isSuperadmin',
+                        'text'        => 'Set nilai KPI',
+                        'url'         => '/kpi',
+                        'icon'        => 'fa fa-fw fa-pen',
+                    ],
+                ],
         ],
         // ['header' => 'Daily Report'],
         // ['header' => 'Serpo Performance'],
@@ -290,44 +296,42 @@ return [
         //     'url'  => 'admin/settings',
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
-        // [
-        //     'text'    => 'multilevel',
-        //     'icon'    => 'fas fa-fw fa-share',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text'    => 'level_one',
-        //             'url'     => '#',
-        //             'submenu' => [
-        //                 [
-        //                     'text' => 'level_two',
-        //                     'url'  => '#',
-        //                 ],
-        //                 [
-        //                     'text'    => 'level_two',
-        //                     'url'     => '#',
-        //                     'submenu' => [
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url'  => '#',
-        //                         ],
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url'  => '#',
-        //                         ],
-        //                     ],
-        //                 ],
-        //             ],
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //     ],
-        // ],
+        [
+            'text'    => 'Daily Report',
+            // 'icon'    => 'fas fa-fw fa-calendar',
+            'submenu' => [
+                [
+                    'can'  => 'isSuperadmin',
+                    'text' => 'Upload Raw Data',
+                    'url'  => '#',
+                    'icon'    => 'fas fa-fw fa-upload',
+                ],
+                [
+                    'text'    => 'Dashboard',
+                    'url'     => '#',
+                    'icon'    => 'fas fa-fw fa-table',
+                ],
+            ],
+        ],
+
+        [
+            'text'    => 'Serpo Performance',
+            // 'icon'    => 'fas fa-fw fa-tachometer-alt',
+            'submenu' => [
+                [
+                    'can'  => 'isSuperadmin',
+                    'text' => 'Upload Raw Data',
+                    'url'  => '#',
+                    'icon'    => 'fas fa-fw fa-upload',
+                ],
+                [
+                    'text'    => 'Dashboard',
+                    'url'     => '#',
+                    'icon'    => 'fas fa-fw fa-table',
+                ],
+            ],
+        ],
+
         // ['header' => 'labels'],
         // [
         //     'text'       => 'important',
@@ -362,7 +366,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ActiveFilter::class,
-        // JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
+        JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
