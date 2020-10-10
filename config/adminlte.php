@@ -303,12 +303,12 @@ return [
                 [
                     'can'  => 'isSuperadmin',
                     'text' => 'Upload Raw Data',
-                    'url'  => '#',
+                    'url'  => '/daily-report',
                     'icon'    => 'fas fa-fw fa-upload',
                 ],
                 [
                     'text'    => 'Dashboard',
-                    'url'     => '#',
+                    'url'     => '/daily-report/dashboard',
                     'icon'    => 'fas fa-fw fa-table',
                 ],
             ],
