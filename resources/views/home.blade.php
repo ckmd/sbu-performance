@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Dashboard - Home')
+@section('title', 'Dashboard - SBU Performance')
 @section('js')
     <!-- Javascript for handling ajax request -->
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
