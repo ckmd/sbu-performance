@@ -19,11 +19,23 @@
                 <table class="table">
                     <tr>
                         <th>Start Date</th>
-                        <td>{{$start}}</td>
+                        <td>
+                            @if(is_null($start))
+                                All Data
+                            @else 
+                                {{ $start }}
+                            @endif
+                        </td>
                     </tr>
                     <tr>
                         <th>End Date</th>
-                        <td>{{$end}}</td>
+                        <td>
+                            @if(is_null( $end ))
+                                All Data
+                            @else 
+                                {{ $end }}
+                            @endif                        
+                        </td>
                     </tr>
                 </table>
             </div>

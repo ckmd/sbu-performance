@@ -160,13 +160,34 @@ class DailyReportController extends Controller
         $stopClock = $dailyReportFilteredBySBUdanTanggal->where('status_reason','Stop Clock')->count();
         $progress = $dailyReportFilteredBySBUdanTanggal->where('status_reason','Progress')->count();
         $grandTotal = $stopClock + $progress;
-
         
         $rataStopClock = round($dailyReportFilteredBySBUdanTanggal->where('status_reason','Stop Clock')->pluck('interference_net_duration')->average(),0);
         $rataProgress = round($dailyReportFilteredBySBUdanTanggal->where('status_reason','Progress')->pluck('interference_net_duration')->average(),0);
         $rataGrandTotal = round($dailyReportFilteredBySBUdanTanggal->whereIn('status_reason',['Progress','Stop Clock'])->pluck('interference_net_duration')->average(),0);
-        
-        //  + ":" + $rataStopClock + "," + $progress + ":" + $rataProgress + "," + $grandTotal + ":" + $rataGrandTotal + ",");
+
+        // code for generate team issue chart
+        $teamIssueUnique = $dailyReportFilteredBySBUdanTanggal->where('team_issue','!=', null)->pluck('team_issue')->unique();
+        $teamIssueCategory = [];
+        $teamIssueValue = [];
+        foreach($teamIssueUnique as $key => $value){
+            $teamIssueCategory[] = $value;
+            $teamIssueValue[] = $dailyReportFilteredBySBUdanTanggal->where('team_issue',$value)->count();
+        }
+
+        // code for generate top 3 product
+        $topProductUnique = $dailyReportFilteredBySBUdanTanggal->pluck('product')->unique();
+        $topProductCategory = [];
+        $topProductValueProgress = [];
+        $topProductValueStopClock = [];
+        foreach($topProductUnique as $key => $value){
+            $topProductCategory[] = $value;
+            $topProductValueProgress[] = $dailyReportFilteredBySBUdanTanggal->where('status_reason','Progress')->where('product',$value)->count();
+            $topProductValueStopClock[] = $dailyReportFilteredBySBUdanTanggal->where('status_reason','Stop Clock')->where('product',$value)->count();
+        }
+        $top3ProductCategory = array_slice($topProductCategory, 0, 3);
+        $top3ProductValueProgress = array_slice($topProductValueProgress, 0, 3);
+        $top3ProductValueStopClock = array_slice($topProductValueStopClock, 0, 3);
+
         return view('daily-report.dashboard',compact(
             'firstData', 
             'lastData', 
@@ -182,7 +203,13 @@ class DailyReportController extends Controller
             'sbu',
             'start',
             'end',
-            'now'
+            'now',
+            'dailyReportFilteredBySBUdanTanggal',
+            'teamIssueCategory',
+            'teamIssueValue',
+            'top3ProductCategory',
+            'top3ProductValueProgress',
+            'top3ProductValueStopClock',
         ));
     }
 

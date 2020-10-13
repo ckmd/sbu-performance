@@ -48,13 +48,15 @@
 
             // The data for our dataset
             data: {
-                labels: ['June', 'July'],
+                labels: ['Progress', 'Stop Clock'],
                 datasets: [
                     {
-                        backgroundColor: 'rgba(120, 30, 22, 0.7)',
-                        label: 'Ticket Open Today',
+                        backgroundColor: 'rgba(113, 168, 217, 0.2)',
+                        borderColor: 'rgba(113, 168, 217, 0.6)',
+                        borderWidth: 2,
+                        label: 'Total',
                         data : [
-                            60, 70
+                            <?php echo json_encode($progress ?? '');?>, <?php echo json_encode($stopClock ?? '');?>
                         ]
                     }],
                 // labels: <?php echo json_encode($ytdBulanKe ?? '');?>,
@@ -85,6 +87,11 @@
 
             // Configuration options go here
             options: {
+                title: {
+                    display: true,
+                    text: 'Ticket Open Today',
+                    fontSize: 15
+                },
                 legend:{
                     position: 'right',
                 },
@@ -121,19 +128,24 @@
 
             // The data for our dataset
             data: {
-                labels: ['January', 'February'],
+                labels: <?php echo json_encode($teamIssueCategory ?? ''); ?>,
                 datasets: [
                     {
-                        backgroundColor: 'rgba(120, 30, 22, 0.7)',
+                        backgroundColor: 'rgba(113, 168, 217, 0.5)',
+                        borderColor: 'rgba(113, 168, 217, 0.6)',
+                        borderWidth: 2,
                         label: 'Issue Team',
-                        data : [
-                            50, 70
-                        ]
+                        data : <?php echo json_encode($teamIssueValue ?? ''); ?>,
                     }],
             },
 
             // Configuration options go here
             options: {
+                title: {
+                    display: true,
+                    text: 'Issue Team',
+                    fontSize: 15
+                },
                 legend:{
                     position: 'right',
                 },
@@ -170,27 +182,33 @@
 
             // The data for our dataset
             data: {
-                labels: ['January', 'February'],
+                labels: <?php echo json_encode($top3ProductCategory ?? ''); ?>,
                 datasets: [
                     {
-                        backgroundColor: 'rgba(120, 30, 22, 0.7)',
+                        backgroundColor: 'rgba(113, 168, 217, 0.2)',
+                        borderColor: 'rgba(113, 168, 217, 0.6)',
+                        borderWidth: 2,
                         label: 'Progress',
-                        data : [
-                            50, 70
-                        ]
+                        data : <?php echo json_encode($top3ProductValueProgress ?? ''); ?>,
                     },
                     {
-                        backgroundColor: 'rgba(30, 230, 212, 0.7)',
+                        backgroundColor: 'rgba(238, 142, 78, 0.2)',
+                        borderColor: 'rgba(238, 142, 78, 0.6)',
+                        borderWidth: 2,
                         label: 'Stop Clock',
-                        data : [
-                            25, 10
-                        ]
+                        data : <?php echo json_encode($top3ProductValueStopClock ?? ''); ?>,
                     }
                 ],
             },
 
             // Configuration options go here
             options: {
+                barRadius: 0,
+                title: {
+                    display: true,
+                    text: 'Top 3 Product',
+                    fontSize: 15
+                },
                 legend:{
                     position: 'right',
                 },
@@ -201,8 +219,19 @@
                         align: 'center',
                         formatter: Math.round,
                         font: {
-                        weight: 'bold'
-                        }
+                            weight: 'bold'
+                        },
+                        formatter: function(value, index, values) {
+                            if(value >0 ){
+                                value = value.toString();
+                                value = value.split(/(?=(?:...)*$)/);
+                                value = value.join(',');
+                                return value;
+                            }else{
+                                value = "";
+                                return value;
+                            }
+                        },
                     }
                 },
                 scales: {
