@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class RoleSeeder extends Seeder
+class JenisAkunSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,9 +12,10 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $batch = [
-            ['nama' => 'superadmin'], 
-            ['nama' => 'admin']
+            ['nama' => 'pusat'], 
+            ['nama' => 'daerah']
         ];
-        DB::table('roles')->insert($batch);
+        DB::table('jenis_akuns')->insert($batch);
+        //
     }
 }

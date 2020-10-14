@@ -21,10 +21,11 @@ class UserSeeder extends CsvSeeder
         $this->header = false;
         $this->mapping = [
             0 => "role_id",
-            1 => "sbu_id",
-            2 => "name",
-            3 => "email",
-            4 => "password",
+            1 => "jenis_akun_id",
+            2 => "sbu_id",
+            3 => "name",
+            4 => "email",
+            5 => "password",
         ];
         $this->hashable = ['password', 'salt'];
         $this->timestamps = true;
