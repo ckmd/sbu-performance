@@ -1,39 +1,38 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use JeroenZwart\CsvSeeder\CsvSeeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class UserSeeder extends Seeder
+class UserSeeder extends CsvSeeder
 {
     /**
      * Run the database seeds.
      *
      * @return void
      */
+
+    public function __construct()
+    {
+        $this->file = '/database/seeds/csvs/user.csv';
+        $this->tablename = 'users';
+        $this->delimiter = ",";
+        $this->header = false;
+        $this->mapping = [
+            0 => "role_id",
+            1 => "sbu_id",
+            2 => "name",
+            3 => "email",
+            4 => "password",
+        ];
+        $this->hashable = ['password', 'salt'];
+        $this->timestamps = true;
+    }
+
     public function run()
     {
-        $batch = [
-            [
-                'role_id' => 1,
-                'sbu_id' => null,
-                'name' => 'superadmin',
-                'email' => 'admin.slareporting@iconpln.co.id',
-                'password' => Hash::make('password'),
-            ], [
-                'role_id' => 2,
-                'sbu_id' => 1,
-                'name' => 'admin.balinusra',
-                'email' => 'admin.balinusra@iconpln.co.id',
-                'password' => Hash::make('password'),
-            ], [
-                'role_id' => 2,
-                'sbu_id' => 2,
-                'name' => 'admin.jabar',
-                'email' => 'admin.jabar@iconpln.co.id',
-                'password' => Hash::make('password'),
-            ]
-        ];
-        DB::table('users')->insert($batch);
+        DB::disableQueryLog();
+        parent::run();
     }
 }

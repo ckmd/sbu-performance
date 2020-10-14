@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d9878989af98d274d36e136d51212c04",
+    "content-hash": "9428d98b859d0f24638fd26c3435575e",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -480,6 +480,53 @@
                 "trusted proxy"
             ],
             "time": "2020-02-22T01:51:47+00:00"
+        },
+        {
+            "name": "flynsarmy/csv-seeder",
+            "version": "v1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Flynsarmy/laravel-csv-seeder.git",
+                "reference": "847905569e9921e5d184a630e2d348f929b69401"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Flynsarmy/laravel-csv-seeder/zipball/847905569e9921e5d184a630e2d348f929b69401",
+                "reference": "847905569e9921e5d184a630e2d348f929b69401",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=4.1.0",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Flynsarmy\\CsvSeeder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Flyn San",
+                    "email": "flynsarmy@gmail.com"
+                }
+            ],
+            "description": "Allows seeding of the database with CSV files",
+            "keywords": [
+                "csv",
+                "laravel",
+                "seed",
+                "seeding",
+                "seeds"
+            ],
+            "time": "2020-03-26T14:29:37+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -4798,6 +4845,60 @@
             "time": "2016-01-20T08:20:44+00:00"
         },
         {
+            "name": "jeroenzwart/laravel-csv-seeder",
+            "version": "v1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeroenzwart/laravel-csv-seeder.git",
+                "reference": "5c795c6c5f8a4e77c77f50a7adbfe5a6df4f4f3b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeroenzwart/laravel-csv-seeder/zipball/5c795c6c5f8a4e77c77f50a7adbfe5a6df4f4f3b",
+                "reference": "5c795c6c5f8a4e77c77f50a7adbfe5a6df4f4f3b",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=5.0.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "JeroenZwart\\CsvSeeder\\CsvSeederServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JeroenZwart\\CsvSeeder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeroen Zwart",
+                    "email": "mailme@jeroenzwart.nl"
+                }
+            ],
+            "description": "Seed the database with Laravel using CSV files",
+            "homepage": "https://github.com/jeroenzwart/laravel-csv-seeder",
+            "keywords": [
+                "csv",
+                "excel",
+                "laravel",
+                "seed",
+                "seeder",
+                "seeding",
+                "seeds"
+            ],
+            "time": "2020-09-30T20:46:12+00:00"
+        },
+        {
             "name": "mockery/mockery",
             "version": "1.4.0",
             "source": {
@@ -5546,6 +5647,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {
