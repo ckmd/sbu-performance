@@ -16,7 +16,7 @@ class RecipientController extends Controller
     public function index()
     {
         $sbus = Sbu::all();
-        $recipients = User::where('role_id',2)->orderBy('name')->get();
+        $recipients = User::where('role_id',2)->orderBy('sbu_id')->get();
         return view('recipient.index', compact('recipients', 'sbus'));
         //
     }

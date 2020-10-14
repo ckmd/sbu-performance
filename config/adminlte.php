@@ -301,15 +301,15 @@ return [
             // 'icon'    => 'fas fa-fw fa-calendar',
             'submenu' => [
                 [
+                    'text'    => 'Dashboard',
+                    'url'     => '/daily-report/dashboard',
+                    'icon'    => 'fas fa-fw fa-table',
+                ],
+                [
                     'can'  => 'isSuperadmin',
                     'text' => 'Upload Raw Data',
                     'url'  => '/daily-report',
                     'icon'    => 'fas fa-fw fa-upload',
-                ],
-                [
-                    'text'    => 'Dashboard',
-                    'url'     => '/daily-report/dashboard',
-                    'icon'    => 'fas fa-fw fa-table',
                 ],
             ],
         ],
@@ -319,15 +319,15 @@ return [
             // 'icon'    => 'fas fa-fw fa-tachometer-alt',
             'submenu' => [
                 [
+                    'text'    => 'Dashboard',
+                    'url'     => '#',
+                    'icon'    => 'fas fa-fw fa-table',
+                ],
+                [
                     'can'  => 'isSuperadmin',
                     'text' => 'Upload Raw Data',
                     'url'  => '#',
                     'icon'    => 'fas fa-fw fa-upload',
-                ],
-                [
-                    'text'    => 'Dashboard',
-                    'url'     => '#',
-                    'icon'    => 'fas fa-fw fa-table',
                 ],
             ],
         ],
@@ -366,7 +366,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ActiveFilter::class,
-        JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
+        // JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,

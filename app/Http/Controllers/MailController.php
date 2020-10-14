@@ -25,7 +25,7 @@ class MailController extends Controller
             ];
             \Mail::send(new \App\Mail\SbuMail($details));
         }
-        return redirect('/home')->with(['success' => 'Pesan Berhasil Dikirim ke '. $totalPenerima .' Penerima']);
+        return redirect()->back()->with(['success' => 'Pesan Berhasil Dikirim ke '. $totalPenerima .' Penerima']);
     }
 
     public function index()

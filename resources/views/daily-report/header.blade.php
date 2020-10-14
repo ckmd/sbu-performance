@@ -77,11 +77,11 @@
                     </div>
                     <div class="form-group">
                         <label for="attachment" class="col-form-label">Attachment* :</label>
-                        <input type="file" class="form-control" id="attachment" name="attachment" required>
+                        <input type="file" class="form-control" id="attachment" name="attachment[]" required multiple>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">View PDF</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to send this Mail ?');">Send Mail</button>
                 </div>
             </form>
