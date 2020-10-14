@@ -54,23 +54,23 @@
                 datasets: [
                 {
                     label: 'Nasional',
-                    lineTension: 0,
-                    backgroundColor: 'transparent',
-                    borderColor: 'rgb(255, 99, 132)',
+                    lineTension: 0.25,
+                    backgroundColor: 'rgba(255, 99, 132, 0.15)',
+                    borderColor: 'rgba(255, 99, 132, 0.75)',
                     data: <?php echo json_encode($ytdNasionalVal ?? ''); ?>,
                 }, 
                 {
                     label: <?php echo json_encode($sbu ?? ''); ?>,
-                    lineTension: 0,
-                    backgroundColor: 'transparent',
-                    borderColor: 'rgb(99, 255, 132)',
+                    lineTension: 0.25,
+                    backgroundColor: 'rgba(99, 255, 132, 0.15)',
+                    borderColor: 'rgba(99, 255, 132, 0.75)',
                     data: <?php echo json_encode($ytdSBUVal ?? ''); ?>
                 },
                 {
                     label: 'KPI',
-                    lineTension: 0,
-                    backgroundColor: 'transparent',
-                    borderColor: 'rgb(99, 132, 255)',
+                    lineTension: 0.25,
+                    backgroundColor: 'rgba(99, 132, 255, 0.15)',
+                    borderColor: 'rgba(99, 132, 255, 0.75)',
                     data: <?php echo json_encode($kpiVal ?? ''); ?>
                 },
                 ],
@@ -78,6 +78,35 @@
 
             // Configuration options go here
             options: {
+                title: {
+                    display: true,
+                    text: 'Year to Date Chart',
+                    fontSize: 20
+                },
+                legend:{
+                    position: 'bottom',
+                },
+                responsive: true,
+                    scales: {
+                    yAxes: [{
+                        afterDataLimits(scale) {
+                            scale.max += 20;
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }]
+                },
+                plugins: {
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: Math.round,
+                        font: {
+                            weight: 'bold',
+                        }
+                    }
+                }
             }
         });
     </script>
@@ -95,16 +124,16 @@
                 datasets: [
                 {
                     label: 'Nasional',
-                    lineTension: 0,
-                    backgroundColor: 'transparent',
-                    borderColor: 'rgb(255, 99, 132)',
+                    lineTension: 0.25,
+                    backgroundColor: 'rgba(255, 99, 132, 0.15)',
+                    borderColor: 'rgba(255, 99, 132, 0.75)',
                     data: <?php echo json_encode($nationalBulanVal ?? ''); ?>,
                 }, 
                 {
                     label: <?php echo json_encode($sbu ?? ''); ?>,
-                    lineTension: 0,
-                    backgroundColor: 'transparent',
-                    borderColor: 'rgb(99, 255, 132)',
+                    lineTension: 0.25,
+                    backgroundColor: 'rgba(99, 255, 132, 0.15)',
+                    borderColor: 'rgba(99, 255, 132, 0.75)',
                     data: <?php echo json_encode($bulanVal ?? ''); ?>
                 },
                 ],
@@ -112,6 +141,35 @@
 
             // Configuration options go here
             options: {
+                title: {
+                    display: true,
+                    text: 'Monthly Chart',
+                    fontSize: 20
+                },
+                legend:{
+                    position: 'bottom',
+                },
+                responsive: true,
+                    scales: {
+                    yAxes: [{
+                        afterDataLimits(scale) {
+                            scale.max += 20;
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }]
+                },
+                plugins: {
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: Math.round,
+                        font: {
+                            weight: 'bold',
+                        }
+                    }
+                }
             }
         });
     </script>
@@ -129,16 +187,16 @@
                 datasets: [
                 {
                     label: 'Nasional',
-                    lineTension: 0,
-                    backgroundColor: 'transparent',
-                    borderColor: 'rgb(255, 99, 132)',
+                    lineTension: 0.25,
+                    backgroundColor: 'rgba(255, 99, 132, 0.15)',
+                    borderColor: 'rgba(255, 99, 132, 0.75)',
                     data: <?php echo json_encode($nationalMingguVal ?? ''); ?>,
                 }, 
                 {
                     label: <?php echo json_encode($sbu ?? ''); ?>,
-                    lineTension: 0,
-                    backgroundColor: 'transparent',
-                    borderColor: 'rgb(99, 255, 132)',
+                    lineTension: 0.25,
+                    backgroundColor: 'rgba(99, 255, 132, 0.15)',
+                    borderColor: 'rgba(99, 255, 132, 0.75)',
                     data: <?php echo json_encode($mingguVal ?? ''); ?>
                 },
                 ],
@@ -146,6 +204,35 @@
 
             // Configuration options go here
             options: {
+                title: {
+                    display: true,
+                    text: 'Weekly Chart',
+                    fontSize: 20
+                },
+                legend:{
+                    position: 'bottom',
+                },
+                responsive: true,
+                    scales: {
+                    yAxes: [{
+                        afterDataLimits(scale) {
+                            scale.max += 20;
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }]
+                },
+                plugins: {
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: Math.round,
+                        font: {
+                            weight: 'bold',
+                        }
+                    }
+                }
             }
         });
     </script>
@@ -163,16 +250,16 @@
                 datasets: [
                 {
                     label: 'Nasional',
-                    lineTension: 0,
-                    backgroundColor: 'transparent',
-                    borderColor: 'rgb(255, 99, 132)',
+                    lineTension: 0.25,
+                    backgroundColor: 'rgba(255, 99, 132, 0.25)',
+                    borderColor: 'rgba(255, 99, 132, 0.75)',
                     data: <?php echo json_encode($nationalHariVal ?? ''); ?>,
                 }, 
                 {
                     label: <?php echo json_encode($sbu ?? ''); ?>,
-                    lineTension: 0,
-                    backgroundColor: 'transparent',
-                    borderColor: 'rgb(99, 255, 132)',
+                    lineTension: 0.25,
+                    backgroundColor: 'rgba(99, 255, 132, 0.25)',
+                    borderColor: 'rgba(99, 255, 132, 0.75)',
                     data: <?php echo json_encode($hariVal ?? ''); ?>
                 },
                 ],
@@ -180,6 +267,35 @@
 
             // Configuration options go here
             options: {
+                title: {
+                    display: true,
+                    text: 'Daily Chart',
+                    fontSize: 20
+                },
+                legend:{
+                    position: 'bottom',
+                },
+                responsive: true,
+                    scales: {
+                    yAxes: [{
+                        afterDataLimits(scale) {
+                            scale.max += 20;
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }]
+                },
+                plugins: {
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: Math.round,
+                        font: {
+                            weight: 'bold',
+                        }
+                    }
+                }
             }
         });
     </script>
@@ -200,7 +316,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card card-outline card-primary">
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">

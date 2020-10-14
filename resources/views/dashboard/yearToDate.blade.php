@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card card-outline card-primary">
     <div class="card-header">Year to date Monitoring</div>
 
     <div class="card-body">

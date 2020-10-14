@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card card-outline card-primary">
     <div class="card-header">MONITORNG (DAILY) - OPEN TICKET LAYANAN PUBLIK : {{ $sbu }} &ensp; {{ $now }}</div>
 
     <div class="card-body">
