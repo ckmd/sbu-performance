@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Sbu;
 use App\User;
 use App\DailyReport;
 use Illuminate\Http\Request;
@@ -61,8 +62,6 @@ class DailyReportController extends Controller
         }
         $showChart  = true;
 
-        $recipients = User::where('role_id',2)->get();
-
         // mengambil data awal, data akhir, dan nama SBU secara dinamis
         $firstData  = $this->getFirstData();
         $lastData   = $this->getLastData();
@@ -73,7 +72,10 @@ class DailyReportController extends Controller
         $start      = $request->start;
         $end        = $request->end;
         $endPlusOne = Carbon::parse($end)->addDays(1);
-        
+
+        $sbuId = Sbu::where('nama', $sbu)->get()->first()->id;
+        $recipients = User::where('role_id',2)->where('sbu_id',$sbuId)->orWhere('jenis_akun_id',1)->get();
+
         $dailyReportFilteredBySBU = DailyReport::where('region_sbu', $sbu)
             ->OrderBy('created_on','asc')
             ->get();
@@ -231,6 +233,7 @@ class DailyReportController extends Controller
      */
     public function store(Request $request)
     {
+        DailyReport::truncate();
         ini_set('upload_max_filesize', '200M');
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 900);

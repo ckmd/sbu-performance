@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Kpi;
+use App\Sbu;
 use App\User;
 use App\Rawdata;
 use Carbon\Carbon;
@@ -216,7 +217,8 @@ class HomeController extends Controller
         $prcntHarianKpiNasional         = round($latestKpi / $realisasiHarianKpiNasional * 100,0);
         $prcntHarianKpiSBU              = round($latestKpi / $realisasiHarianKpiSBU * 100,0);
 
-        $recipients = User::where('role_id',2)->get();
+        $sbuId = Sbu::where('nama', $sbu)->get()->first()->id;
+        $recipients = User::where('role_id',2)->where('sbu_id',$sbuId)->orWhere('jenis_akun_id',1)->get();
         return view('home',compact(
             'sbu','start','end','now', 'latestMonth',
             'firstData', 'lastData', 'kpiVal',

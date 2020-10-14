@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
         
         // Routing for daily report
         Route::get('daily-report','DailyReportController@index')->name('daily-report.index');
-        Route::post('daily-report', 'DailyReportController@query')->name('daily-report.query');
+        Route::post('daily-report/dashboard', 'DailyReportController@query')->name('daily-report.query');
         Route::post('daily-report/store', 'DailyReportController@store')->name('daily-report.store');
     });
     

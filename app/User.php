@@ -69,7 +69,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Sbu', 'sbu_id');
     }
 
-    public function sbu()
+    public function jenisAkun()
     {
         return $this->belongsTo('App\JenisAkun', 'jenis_akun_id');
     }
