@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "maatwebsite/excel": "^3.1",
-        "yajra/laravel-datatables-oracle": "^9.10"
+        "yajra/laravel-datatables-oracle": "^9.10",
+        "jeroenzwart/laravel-csv-seeder": "1.*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
