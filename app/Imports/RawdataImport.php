@@ -52,7 +52,7 @@ class RawdataImport implements ToModel, WithHeadingRow
             'Status' => $row['status'],
             'Bulan' => date_format($createdOn, "F"),
             'Minggu' => Carbon::instance($createdOn)->endOfWeek(Carbon::SATURDAY)->weekOfYear,
-            'Hari' => date_format($createdOn, "d-m-Y")
+            'Hari' => Carbon::instance($createdOn)->format('d-m-Y'),
         ]);
     }
 }
