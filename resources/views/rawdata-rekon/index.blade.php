@@ -12,8 +12,8 @@
                     <div class="text-center">
                         <img src="{{asset('images/excel.png')}}"  alt="Upload Excel File">
 
-                        <h3>Upload Raw Data CRM</h3>
-                        <form action="{{route('rawdata.store')}}" method="POST" enctype="multipart/form-data">
+                        <h3>Upload Raw Data Rekon</h3>
+                        <form action="{{route('rawdata-rekon.store')}}" method="POST" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <input type="file" class="btn btn-secondary btn-md" name="file" required>
                             <button type="submit" class="ml-2 btn btn-secondary"><i class="fa fa-upload"></i><span> Upload</span></button>

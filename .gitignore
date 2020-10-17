@@ -4,6 +4,7 @@
 /public/pdf
 /public/storage
 /public/file_sbu
+/public/file_rekon
 /public/file_daily_report
 /storage/*.key
 /vendor

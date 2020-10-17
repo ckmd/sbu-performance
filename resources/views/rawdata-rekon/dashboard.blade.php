@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Dashboard - SBU Performance CRM')
+@section('title', 'Dashboard - SBU Performance Rekon')
 @section('js')
     <!-- Javascript for handling ajax request -->
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -292,17 +292,17 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <p>Rawdata CRM yang telah diupload dari {{$firstData}} hingga {{$lastData}}</p>
+                    <p>Rawdata Rekon yang telah diupload dari {{$firstData}} hingga {{$lastData}}</p>
 
-                    @include('dashboard.filterForm')
+                    @include('rawdata-rekon.filterForm')
                 </div>
             </div>
             @if($showChart == true)
-            @include('dashboard.header')
-            @include('dashboard.yearToDate')
-            @include('dashboard.monthly')
-            @include('dashboard.weekly')
-            @include('dashboard.daily')
+            @include('rawdata-rekon.header')
+            @include('rawdata-rekon.yearToDate')
+            @include('rawdata-rekon.monthly')
+            @include('rawdata-rekon.weekly')
+            @include('rawdata-rekon.daily')
             @endif
         </div>
     </div>
