@@ -38,15 +38,15 @@ class HomeController extends Controller
     }
     
     public function getFirstData(){
-        return Rawdata::orderBy('Created On', 'asc')->first()["Created On"];
+        return Rawdata::orderBy('created_on', 'asc')->first()["created_on"];
     }
 
     public function getLastData(){
-        return Rawdata::orderBy('Created On', 'desc')->first()["Created On"];
+        return Rawdata::orderBy('created_on', 'desc')->first()["created_on"];
     }
 
     public function getSBUName(){
-        return Rawdata::distinct('Region SBU (Terminating) (Address)')->pluck('Region SBU (Terminating) (Address)');
+        return Rawdata::distinct('region_sbu')->pluck('region_sbu');
     }
 
     public function message(Request $request)
@@ -81,32 +81,32 @@ class HomeController extends Controller
         $end        = $request->end;
         $endPlusOne = Carbon::parse($end)->addDays(1);
         
-        $rawdataFilteredBySBU   = Rawdata::where('Region SBU (Terminating) (Address)', $sbu)->OrderBy('Created On','asc')->get();
-        $rawdataOriginal        = Rawdata::OrderBy('Created On','asc')->get();
+        $rawdataFilteredBySBU   = Rawdata::where('region_sbu', $sbu)->OrderBy('created_on','asc')->get();
+        $rawdataOriginal        = Rawdata::OrderBy('created_on','asc')->get();
 
         // cek kondisi sesuai dengan filter date
         // apabila terdapat tanggal start dan tanggal end
         if(!is_null($start) && !is_null($end)){
             $rawdataFilteredBySBUdanTanggal = $rawdataFilteredBySBU
-                ->where('Created On','>',$start)
-                ->where('Created On','<',$endPlusOne);
+                ->where('created_on','>',$start)
+                ->where('created_on','<',$endPlusOne);
             $rawdataOriginalFilteredTanggal = $rawdataOriginal
-                ->where('Created On','>',$start)
-                ->where('Created On','<',$endPlusOne);
+                ->where('created_on','>',$start)
+                ->where('created_on','<',$endPlusOne);
         }
         // apabila hanya terdapat tanggal start, maka mengambil sampai data terakhir
         else if(!is_null($start)){
             $rawdataFilteredBySBUdanTanggal = $rawdataFilteredBySBU
-                ->where('Created On','>',$start);
+                ->where('created_on','>',$start);
             $rawdataOriginalFilteredTanggal = $rawdataOriginal
-                ->where('Created On','>',$start);
+                ->where('created_on','>',$start);
         }
         // apabila hanya terdapat tanggal end, maka mengambil sampai data terawal
         else if(!is_null($end)){
             $rawdataFilteredBySBUdanTanggal = $rawdataFilteredBySBU
-                ->where('Created On','<',$endPlusOne);
+                ->where('created_on','<',$endPlusOne);
             $rawdataOriginalFilteredTanggal = $rawdataOriginal
-                ->where('Created On','<',$endPlusOne);
+                ->where('created_on','<',$endPlusOne);
         }
         // apabila tidak terdapat start dan end, maka mengambil dari data terawal sampai dengan data terakhir
         else{
@@ -116,17 +116,17 @@ class HomeController extends Controller
         // mendapatkan bulan terakhir
         $latestMonth    = $rawdataFilteredBySBUdanTanggal->last()->Bulan;
 
-        $groupbyMonth   = $rawdataFilteredBySBUdanTanggal->groupBy('Bulan');
+        $groupbyMonth   = $rawdataFilteredBySBUdanTanggal->groupBy('month');
 
         // data per bulan nasional tanpa filter
-        $nationalGroupbyMonth   = $rawdataOriginalFilteredTanggal->groupBy('Bulan');
+        $nationalGroupbyMonth   = $rawdataOriginalFilteredTanggal->groupBy('month');
 
         // Yeartodate
         $accumulativeCount  = 0;
         $accumulativeTime   = 0;
         foreach ($nationalGroupbyMonth as $key => $gbm){
             $accumulativeCount  += $gbm->count();
-            $accumulativeTime   += collect($gbm->pluck('Interference Net Duration (DurationId) (Duration)'))->sum();
+            $accumulativeTime   += collect($gbm->pluck('interference_net_duration'))->sum();
             $ytdNasionalVal[]   = round($accumulativeTime / $accumulativeCount,0);
         }
         // per sbu
@@ -134,7 +134,7 @@ class HomeController extends Controller
         $accumulativeTime = 0;
         foreach ($groupbyMonth as $key => $gbm){
             $accumulativeCount  += $gbm->count();
-            $accumulativeTime   += collect($gbm->pluck('Interference Net Duration (DurationId) (Duration)'))->sum();
+            $accumulativeTime   += collect($gbm->pluck('interference_net_duration'))->sum();
             $ytdBulanKe[]       = $key;
             $ytdSBUVal[]        = round($accumulativeTime / $accumulativeCount,0);
         }
@@ -143,12 +143,12 @@ class HomeController extends Controller
         // Monthly
         // secara nasional
         foreach ($nationalGroupbyMonth as $key => $gbm){
-            $avg                = round(collect($gbm->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
+            $avg                = round(collect($gbm->pluck('interference_net_duration'))->avg(),0);
             $nationalBulanVal[] = $avg;
         }
         // per sbu
         foreach ($groupbyMonth as $key => $gbm){
-            $avg        = round(collect($gbm->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
+            $avg        = round(collect($gbm->pluck('interference_net_duration'))->avg(),0);
             $kpiVal[]   = $latestKpi;
             $bulanKe[]  = $key;
             $bulanVal[] = $avg;
@@ -157,18 +157,18 @@ class HomeController extends Controller
 
         // weekly
         // filter berdasarkan SBU
-        $groupbyWeek            = $rawdataFilteredBySBUdanTanggal->groupBy('Minggu');
+        $groupbyWeek            = $rawdataFilteredBySBUdanTanggal->groupBy('week');
 
         // data nasional tanpa filter
-        $nationalGroupbyWeek    = $rawdataOriginalFilteredTanggal->groupBy('Minggu');
+        $nationalGroupbyWeek    = $rawdataOriginalFilteredTanggal->groupBy('week');
         // secara nasional
         foreach ($nationalGroupbyWeek as $key => $gbw){
-            $avg                    = round(collect($gbw->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
+            $avg                    = round(collect($gbw->pluck('interference_net_duration'))->avg(),0);
             $nationalMingguVal[]    = $avg;
         }
         // per sbu
         foreach ($groupbyWeek as $key => $gbw){
-            $avg            = round(collect($gbw->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
+            $avg            = round(collect($gbw->pluck('interference_net_duration'))->avg(),0);
             $mingguKe[]     = $key;
             $mingguVal[]    = $avg;
         }
@@ -176,14 +176,14 @@ class HomeController extends Controller
 
         // daily
         // filter berdasarkan SBU
-        $groupbyDay         = $rawdataFilteredBySBUdanTanggal->where('Bulan',$latestMonth)->groupBy('Hari');
+        $groupbyDay         = $rawdataFilteredBySBUdanTanggal->where('month',$latestMonth)->groupBy('day');
         // data nasional tanpa filter
-        $nationalGroupbyDay = $rawdataOriginalFilteredTanggal->where('Bulan',$latestMonth)->groupBy('Hari');
+        $nationalGroupbyDay = $rawdataOriginalFilteredTanggal->where('month',$latestMonth)->groupBy('day');
 
         // secara nasional
         $nationalHariVal    = [];
         foreach ($nationalGroupbyDay as $key => $gbd){
-            $avg                = round(collect($gbd->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
+            $avg                = round(collect($gbd->pluck('interference_net_duration'))->avg(),0);
             $nationalHariVal[]  = $avg;
         }
         
@@ -191,7 +191,7 @@ class HomeController extends Controller
         $hariVal    = [];
         $hariKe     = [];
         foreach ($groupbyDay as $key => $gbd){
-            $avg        = round(collect($gbd->pluck('Interference Net Duration (DurationId) (Duration)'))->avg(),0);
+            $avg        = round(collect($gbd->pluck('interference_net_duration'))->avg(),0);
             $hariKe[]   = substr((string)$key,0,2);
             $hariVal[]  = $avg;
         }

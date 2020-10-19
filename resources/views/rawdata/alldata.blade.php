@@ -20,20 +20,19 @@
                "scrollX": true,
                ajax: '{{ url('alldata-list') }}',
                columns: [
-                        { data: 'Ticket ID', name: 'Ticket ID' },
-                        { data: 'Incident ID', name: 'Incident ID' },
-                        { data: 'Service ID', name: 'Service ID' },
-                        { data: 'Customer', name: 'Customer' },
-                        { data: 'Region SBU (Terminating) (Address)', name: 'Region SBU (Terminating) (Address)' },
-                        { data: 'Created On', name: 'Created On' },
-                        { data: 'Close Date', name: 'Close Date' },
-                        { data: 'Interference Time', name: 'Interference Time' },
-                        { data: 'Service ID Status', name: 'Service ID Status' },
-                        { data: 'Product', name: 'Product' },
-                        { data: 'Bulan', name: 'Bulan' },
-                        { data: 'Minggu', name: 'Minggu' },
-                        { data: 'Hari', name: 'Hari' },
-                     ]
+                  { data: 'ticket_id', name: 'ticket_id' },
+                  { data: 'incident_id', name: 'incident_id' },
+                  { data: 'service_id', name: 'service_id' },
+                  { data: 'customer', name: 'customer' },
+                  { data: 'created_on', name: 'created_on' },
+                  { data: 'interference_net_duration', name: 'interference_net_duration' },
+                  { data: 'region_sbu', name: 'region_sbu' },
+                  { data: 'product', name: 'product' },
+                  { data: 'interference', name: 'interference' },                        
+                  { data: 'month', name: 'month' },
+                  { data: 'week', name: 'week' },
+                  { data: 'day', name: 'day' },
+               ]
             });
          });
          </script>
@@ -58,12 +57,11 @@
                      <th>Incident ID</th>
                      <th>Service ID</th>
                      <th>Customer</th>
-                     <th>Region SBU (Terminating) (Address)</th>
                      <th>Created On</th>
-                     <th>Close Date</th>
-                     <th>Interference Time</th>
-                     <th>Service ID Status</th>
+                     <th>Interference Net Duration</th>
+                     <th>Region SBU (Terminating) (Address)</th>
                      <th>Product</th>
+                     <th>Interference</th>
                      <th>Bulan</th>
                      <th>Minggu</th>
                      <th>Hari</th>
