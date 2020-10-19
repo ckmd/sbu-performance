@@ -282,6 +282,7 @@ return [
                         'url'         => '/alldata-rekon',
                         'icon'        => 'fa fa-fw fa-file',
                     ],
+                    ['header' => 'Kpi dan Recipient Mail'],
                     [
                         'can'         => 'isSuperadmin',
                         'text'        => 'Set nilai KPI',
@@ -329,6 +330,12 @@ return [
                     'text' => 'Upload Raw Data',
                     'url'  => '/daily-report',
                     'icon'    => 'fas fa-fw fa-upload',
+                ],
+                [
+                    'can'  => 'isSuperadmin',
+                    'text' => 'View All Data',
+                    'url'  => '/alldata-daily-report',
+                    'icon'    => 'fas fa-fw fa-file',
                 ],
             ],
         ],

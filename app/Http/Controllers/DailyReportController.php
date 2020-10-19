@@ -8,6 +8,7 @@ use App\User;
 use App\DailyReport;
 use Illuminate\Http\Request;
 use App\Imports\DailyReportImport;
+use Yajra\Datatables\Datatables;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DailyReportController extends Controller
@@ -213,6 +214,31 @@ class DailyReportController extends Controller
             'top3ProductValueProgress',
             'top3ProductValueStopClock',
         ));
+    }
+
+    public function alldata()
+    {
+        return view('daily-report.alldata');
+    }
+    public function alldataList()
+    {
+        ini_set('upload_max_filesize', '200M');
+        ini_set('memory_limit', '-1');
+        ini_set('max_execution_time', 900);
+
+        // $rawDatas = Rawdata::get()->unique('Ticket ID')->values()->all();
+        $rawDatas = DailyReport::all();
+        return Datatables::of($rawDatas)->make(true);
+    }
+
+    public function delete()
+    {
+        ini_set('memory_limit', '-1');
+        $rawdata = DailyReport::all();
+        foreach($rawdata as $item){
+            $item->delete();
+        }
+        return redirect('/alldata-daily-report');
     }
 
     /**
