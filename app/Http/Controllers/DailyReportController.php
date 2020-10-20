@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Sbu;
 use App\User;
+use App\TemplateMail;
 use App\DailyReport;
 use Illuminate\Http\Request;
 use App\Imports\DailyReportImport;
@@ -76,6 +77,7 @@ class DailyReportController extends Controller
 
         $sbuId = Sbu::where('nama', $sbu)->get()->first()->id;
         $recipients = User::where('role_id',2)->where('sbu_id',$sbuId)->orWhere('jenis_akun_id',1)->get();
+        $templateMail = TemplateMail::first();
 
         $dailyReportFilteredBySBU = DailyReport::where('region_sbu', $sbu)
             ->OrderBy('created_on','asc')
@@ -191,6 +193,8 @@ class DailyReportController extends Controller
         $top3ProductValueProgress = array_slice($topProductValueProgress, 0, 3);
         $top3ProductValueStopClock = array_slice($topProductValueStopClock, 0, 3);
 
+        
+
         return view('daily-report.dashboard',compact(
             'firstData', 
             'lastData', 
@@ -203,6 +207,7 @@ class DailyReportController extends Controller
             'rataProgress',
             'rataGrandTotal',
             'recipients',
+            'templateMail',
             'sbu',
             'start',
             'end',

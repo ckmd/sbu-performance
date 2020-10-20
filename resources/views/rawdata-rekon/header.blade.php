@@ -40,8 +40,18 @@
                 </table>
             </div>
         </div>
-        <button class="btn btn-success" onclick="window.print()"><i class="fa fa-download"></i> <span> Download to PDF</span></button>
-        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalMail"><i class="fa fa-envelope"></i> <span> Send PDF to SBU</span></button>
+        <div class="row">
+            <form action="{{route('rawdata-rekon.export')}}" method="POST" enctype="multipart/form-data">
+                {{csrf_field()}}
+                <input type="hidden" name="sbu" value="{{ $sbu }}">
+                <input type="hidden" name="start" value="{{ $start }}">
+                <input type="hidden" name="end" value="{{ $end }}">
+                <button type="submit" class="btn btn-success mx-1" ><i class="fa fa-table"></i> <span> Download to Excel</span></button>
+            </form>
+    
+            <button class="btn btn-success mx-1" onclick="window.print()"><i class="fa fa-download"></i> <span> Download to PDF</span></button>
+            <button class="btn btn-primary mx-1" type="button" data-toggle="modal" data-target="#modalMail"><i class="fa fa-envelope"></i> <span> Send PDF to SBU</span></button>
+        </div>
     </div>
 </div>
 
@@ -62,22 +72,22 @@
                         <label class="col-form-label">Recipient List :</label>
                         @foreach ($recipients as $item)
                         <div class="form-check">
-                            <input class="form-check-input" name="penerima[]" type="checkbox" id="inlineCheckbox{{ $item->id }}" value="{{ $item->email }}">
+                            <input class="form-check-input" name="penerima[]" type="checkbox" id="inlineCheckbox{{ $item->id }}" value="{{ $item->email }}" checked>
                             <label class="form-check-label" for="inlineCheckbox{{ $item->id }}">{{ $item->email }}</label>
                         </div>
                         @endforeach
                     </div>
                     <div class="form-group">
                         <label for="subject" class="col-form-label">Subject* :</label>
-                        <input type="text" class="form-control" id="subject" name="subject" required>
+                        <input type="text" class="form-control" id="subject" name="subject" value="{{ $templateMail->subject }}" required>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Message* :</label>
-                        <textarea class="form-control" id="message-text" name="message" required></textarea>
+                        <textarea class="form-control" id="message-text" name="message" required>{{ $templateMail->description }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="attachment" class="col-form-label">Attachment* :</label>
-                        <input type="file" class="form-control" id="attachment" name="attachment" required>
+                        <input type="file" class="form-control" id="attachment" name="attachment[]" required multiple>
                     </div>
                 </div>
                 <div class="modal-footer">

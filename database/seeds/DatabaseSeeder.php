@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(KpiSeeder::class);
         $this->call(JenisAkunSeeder::class);
+        $this->call(TemplateMailSeeder::class);
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Kpi;
 use App\Sbu;
 use App\User;
+use App\TemplateMail;
 use App\Rawdata;
 use Carbon\Carbon;
 
@@ -114,7 +115,7 @@ class HomeController extends Controller
             $rawdataOriginalFilteredTanggal = $rawdataOriginal;
         }
         // mendapatkan bulan terakhir
-        $latestMonth    = $rawdataFilteredBySBUdanTanggal->last()->Bulan;
+        $latestMonth    = $rawdataFilteredBySBUdanTanggal->last()->month;
 
         $groupbyMonth   = $rawdataFilteredBySBUdanTanggal->groupBy('month');
 
@@ -219,6 +220,8 @@ class HomeController extends Controller
 
         $sbuId = Sbu::where('nama', $sbu)->get()->first()->id;
         $recipients = User::where('role_id',2)->where('sbu_id',$sbuId)->orWhere('jenis_akun_id',1)->get();
+        $templateMail = TemplateMail::first();
+
         return view('home',compact(
             'sbu','start','end','now', 'latestMonth',
             'firstData', 'lastData', 'kpiVal',
@@ -233,7 +236,7 @@ class HomeController extends Controller
             'prcntBulananKpiNasional', 'prcntBulananKpiSBU',
             'prcntMingguanKpiNasional', 'prcntMingguanKpiSBU',
             'prcntHarianKpiNasional', 'prcntHarianKpiSBU',
-            'recipients'
+            'recipients', 'templateMail'
         ));
         // sampe sini, membuat array / object dari hasil rata2
     }

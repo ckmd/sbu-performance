@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\TemplateMail;
 
 class MailController extends Controller
 {
@@ -16,20 +17,22 @@ class MailController extends Controller
         $file           = $request->file('attachment');
         $penerima       = $request->penerima;
         $totalPenerima  = count($penerima);
-        foreach($penerima as $kPenerima => $vPenerima){
-            $details = [
-                'body'          => $request->message,
-                'subject'       => $request->subject,
-                'attachment'    => $file,
-                'targetEmail'   => $vPenerima
-            ];
-            \Mail::send(new \App\Mail\SbuMail($details));
-        }
+        // foreach($penerima as $kPenerima => $vPenerima){
+        $details = [
+            'body'          => $request->message,
+            'subject'       => $request->subject,
+            'attachment'    => $file,
+            'targetEmail'   => $penerima
+        ];
+        \Mail::send(new \App\Mail\SbuMail($details));
+        // }
         return redirect()->back()->with(['success' => 'Pesan Berhasil Dikirim ke '. $totalPenerima .' Penerima']);
     }
 
     public function index()
     {
+        $templateMail = TemplateMail::first();
+        return view('template-email.index', compact('templateMail'));
         //
     }
 
@@ -83,8 +86,23 @@ class MailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $id = $request->id;
+        $subject = $request->subject;
+        $description = $request->description;
+
+        TemplateMail::find($id)
+            ->update(
+                [
+                    'subject' => $subject,
+                    'description' => $description
+                ]
+            );
+        
+        return redirect()
+            ->route('mail.index')
+            ->with('success', 'Template Email Berhasil Diperbarui !');
         //
     }
 

@@ -62,18 +62,18 @@
                         <label class="col-form-label">Recipient List :</label>
                         @foreach ($recipients as $item)
                         <div class="form-check">
-                            <input class="form-check-input" name="penerima[]" type="checkbox" id="inlineCheckbox{{ $item->id }}" value="{{ $item->email }}">
+                            <input class="form-check-input" name="penerima[]" type="checkbox" id="inlineCheckbox{{ $item->id }}" value="{{ $item->email }}" checked>
                             <label class="form-check-label" for="inlineCheckbox{{ $item->id }}">{{ $item->email }}</label>
                         </div>
                         @endforeach
                     </div>
                     <div class="form-group">
                         <label for="subject" class="col-form-label">Subject* :</label>
-                        <input type="text" class="form-control" id="subject" name="subject" required>
+                        <input type="text" class="form-control" id="subject" name="subject" value="{{ $templateMail->subject }}" required>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Message* :</label>
-                        <textarea class="form-control" id="message-text" name="message" required></textarea>
+                        <textarea class="form-control" id="message-text" name="message" required>{{ $templateMail->description }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="attachment" class="col-form-label">Attachment* :</label>

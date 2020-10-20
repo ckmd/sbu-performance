@@ -10,7 +10,9 @@ use App\RawdataRekon;
 use App\Kpi;
 use App\Sbu;
 use App\User;
+use App\TemplateMail;
 use Carbon\Carbon;
+use App\Exports\RawdataRekonExport;
 
 class RawdataRekonController extends Controller
 {
@@ -244,6 +246,8 @@ class RawdataRekonController extends Controller
 
         $sbuId = Sbu::where('nama', $sbu)->get()->first()->id;
         $recipients = User::where('role_id',2)->where('sbu_id',$sbuId)->orWhere('jenis_akun_id',1)->get();
+        $templateMail = TemplateMail::first();
+
         return view('rawdata-rekon.dashboard',compact(
             'sbu','start','end','now', 'latestMonth',
             'firstData', 'lastData', 'kpiVal',
@@ -258,7 +262,7 @@ class RawdataRekonController extends Controller
             'prcntBulananKpiNasional', 'prcntBulananKpiSBU',
             'prcntMingguanKpiNasional', 'prcntMingguanKpiSBU',
             'prcntHarianKpiNasional', 'prcntHarianKpiSBU',
-            'recipients'
+            'recipients', 'templateMail'
         ));
         // sampe sini, membuat array / object dari hasil rata2
     }
@@ -311,6 +315,27 @@ class RawdataRekonController extends Controller
         return redirect('/dashboard-rekon');
         //
     }
+
+    public function export_rawdata_rekon(Request $request)
+	{
+        $sbu = $request->sbu;
+        $start = $request->start;
+        $end = $request->end;
+        $endPlusOne = Carbon::parse($end)->addDays(1);
+
+        if(is_null($start) && is_null($end)){
+            $start = Carbon::createFromFormat('d/m/Y', '01/01/2000');
+            $endPlusOne = Carbon::createFromFormat('d/m/Y', '31/12/2030');
+        }
+        else if(is_null($start)){
+            $start = Carbon::createFromFormat('d/m/Y', '01/01/2000');
+        }
+        else if(is_null($end)){
+            $endPlusOne = Carbon::createFromFormat('d/m/Y', '31/12/2030');
+        }
+
+        return Excel::download(new RawdataRekonExport($sbu, $start, $endPlusOne), 'rawdata-query-result.xlsx');
+	}
 
     /**
      * Display the specified resource.

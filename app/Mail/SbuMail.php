@@ -31,6 +31,7 @@ class SbuMail extends Mailable
      */
     public function build()
     {
+        // $targetEmail = explode(',', $this->details['targetEmail']);
         $targetEmail = $this->details['targetEmail'];
         $subject = $this->details['subject'];
 

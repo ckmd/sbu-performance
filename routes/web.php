@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('alldata-list', 'RawdataController@alldataList');
         Route::get('download', 'RawdataController@download')->name("rawdata.download");
         Route::get('delete', 'RawdataController@delete')->name("rawdata.delete");
+        Route::post('rawdata-export', 'RawdataController@export_rawdata')->name("rawdata.export");
 
         // Mail and Recipient
         Route::post('/send-mail', 'MailController@send')->name("mail.send");
@@ -46,6 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('alldata-rekon', 'RawdataRekonController@alldata');
         Route::get('alldata-rekon-list', 'RawdataRekonController@alldataList');
         Route::get('rawdata-rekon-delete', 'RawdataRekonController@delete')->name('rawdata-rekon.delete');
+        Route::post('rawdata-rekon-export', 'RawdataRekonController@export_rawdata_rekon')->name("rawdata-rekon.export");
 
         // Routing for daily report
         Route::get('daily-report','DailyReportController@index')->name('daily-report.index');
@@ -54,6 +56,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('alldata-daily-report', 'DailyReportController@alldata');
         Route::get('alldata-daily-report-list', 'DailyReportController@alldataList');
         Route::get('daily-report-delete', 'DailyReportController@delete')->name('daily-report.delete');
+
+        // routing for template mail
+        Route::get('template-email', 'MailController@index')->name("mail.index");
+        Route::post('template-email', 'MailController@update')->name("mail.update");
     });
     
     // routing for dashboard crm

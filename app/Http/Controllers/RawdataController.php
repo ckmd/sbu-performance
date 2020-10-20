@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Imports\RawdataImport;
 use Yajra\Datatables\Datatables;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\RawdataExport;
 use App\Rawdata;
+use Carbon\Carbon;
 
 class RawdataController extends Controller
 {
@@ -85,6 +87,27 @@ class RawdataController extends Controller
         // alihkan halaman kembali
         return redirect('/home');
     }
+
+    public function export_rawdata(Request $request)
+	{
+        $sbu = $request->sbu;
+        $start = $request->start;
+        $end = $request->end;
+        $endPlusOne = Carbon::parse($end)->addDays(1);
+
+        if(is_null($start) && is_null($end)){
+            $start = Carbon::createFromFormat('d/m/Y', '01/01/2000');
+            $endPlusOne = Carbon::createFromFormat('d/m/Y', '31/12/2030');
+        }
+        else if(is_null($start)){
+            $start = Carbon::createFromFormat('d/m/Y', '01/01/2000');
+        }
+        else if(is_null($end)){
+            $endPlusOne = Carbon::createFromFormat('d/m/Y', '31/12/2030');
+        }
+
+        return Excel::download(new RawdataExport($sbu, $start, $endPlusOne), 'rawdata-query-result.xlsx');
+	}
 
     /**
      * Display the specified resource.
