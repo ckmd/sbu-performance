@@ -65,7 +65,7 @@ class DailyReportController extends Controller
 
         // filter apabila tidak memilih sbu manapun
         if($request->sbu == ""){
-            return redirect()->route('daily-report.index');
+            return redirect()->route('daily-report.dashboard');
         }
         $showChart  = true;
 
