@@ -24,10 +24,15 @@ class DailyReportController extends Controller
                 // mengambil data awal, data akhir, dan nama SBU secara dinamis
         $firstData  = $this->getFirstData();
         $lastData   = $this->getLastData();
+        $tanggalUpload  = $this->getTanggalUpload();
         $sbuRegion  = $this->getSBUName();
         $showChart  = false;
         
-        return view('daily-report.dashboard',compact('firstData', 'lastData', 'sbuRegion','showChart'));
+        return view('daily-report.dashboard',compact('firstData', 'lastData', 'sbuRegion','showChart', 'tanggalUpload'));
+    }
+
+    public function getTanggalUpload(){
+        return DailyReport::distinct('created_at')->pluck('created_at')->sort();
     }
 
     public function getFirstData(){
@@ -68,21 +73,25 @@ class DailyReportController extends Controller
         $firstData  = $this->getFirstData();
         $lastData   = $this->getLastData();
         $sbuRegion  = $this->getSBUName();
+        $tanggalUpload = $this->getTanggalUpload();
 
         // mengambil setiap variabel dari request
         $sbu        = $request->sbu;
         $start      = $request->start;
         $end        = $request->end;
+        $tanggal    = $request->tanggal;
         $endPlusOne = Carbon::parse($end)->addDays(1);
 
         $sbuId = Sbu::where('nama', $sbu)->get()->first()->id;
         $recipients = User::where('role_id',2)->where('sbu_id',$sbuId)->orWhere('jenis_akun_id',1)->get();
         $templateMail = TemplateMail::first();
 
-        $dailyReportFilteredBySBU = DailyReport::where('region_sbu', $sbu)
+        $dailyReportFilteredBySBU = DailyReport::where('created_at', $tanggal)
+            ->where('region_sbu', $sbu)
             ->OrderBy('created_on','asc')
             ->get();
-        $dailyReportOriginal = DailyReport::OrderBy('created_on','asc')
+        $dailyReportOriginal = DailyReport::where('created_at',$tanggal)
+            ->OrderBy('created_on','asc')
             ->get();
 
         // filter start dan end
@@ -193,12 +202,11 @@ class DailyReportController extends Controller
         $top3ProductValueProgress = array_slice($topProductValueProgress, 0, 3);
         $top3ProductValueStopClock = array_slice($topProductValueStopClock, 0, 3);
 
-        
-
         return view('daily-report.dashboard',compact(
             'firstData', 
             'lastData', 
             'sbuRegion',
+            'tanggalUpload',
             'showChart',
             'stopClock',
             'progress',
@@ -264,7 +272,7 @@ class DailyReportController extends Controller
      */
     public function store(Request $request)
     {
-        DailyReport::truncate();
+        // DailyReport::truncate();
         ini_set('upload_max_filesize', '200M');
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 900);
@@ -279,8 +287,7 @@ class DailyReportController extends Controller
 		$file->move('file_daily_report',$nama_file);
  
 		// import data
-		Excel::import(new DailyReportImport, public_path('/file_daily_report/'.$nama_file));
- 
+        Excel::import(new DailyReportImport, public_path('/file_daily_report/'.$nama_file));
         return redirect('/daily-report/dashboard');
         //
     }

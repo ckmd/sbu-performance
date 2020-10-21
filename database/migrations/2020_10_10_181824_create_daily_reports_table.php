@@ -36,7 +36,8 @@ class CreateDailyReportsTable extends Migration
             $table->integer('total_amount')->nullable()->default(NULL);
             $table->text('service_id_status')->nullable()->default(NULL);
             $table->text('bandwidth')->nullable()->default(NULL);
-            $table->timestamps();
+            $table->date('created_at');
+            $table->date('updated_at');
         });
     }
 
