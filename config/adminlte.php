@@ -348,18 +348,36 @@ return [
 
         [
             'text'    => 'Serpo Performance',
-            // 'icon'    => 'fas fa-fw fa-tachometer-alt',
+            'icon'    => 'fas fa-fw fa-tachometer-alt',
             'submenu' => [
                 [
                     'text'    => 'Dashboard',
                     'url'     => '#',
-                    'icon'    => 'fas fa-fw fa-table',
+                    // 'icon'    => 'fas fa-fw fa-table',
                 ],
                 [
                     'can'  => 'isSuperadmin',
                     'text' => 'Upload Raw Data',
                     'url'  => '#',
-                    'icon'    => 'fas fa-fw fa-upload',
+                    // 'icon'    => 'fas fa-fw fa-upload',
+                ],
+                [
+                    'can'  => 'isSuperadmin',
+                    'text' => 'All Calculated Data',
+                    'url'  => '#',
+                    // 'icon'    => 'fas fa-fw fa-upload',
+                ],
+                [
+                    'can'  => 'isSuperadmin',
+                    'text' => 'Performance By Region',
+                    'url'  => '#',
+                    // 'icon'    => 'fas fa-fw fa-upload',
+                ],
+                [
+                    'can'  => 'isSuperadmin',
+                    'text' => 'Performance Nasional',
+                    'url'  => '#',
+                    // 'icon'    => 'fas fa-fw fa-upload',
                 ],
             ],
         ],
