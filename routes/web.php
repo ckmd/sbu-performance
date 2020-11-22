@@ -25,8 +25,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('rawdata','RawdataController');
         // Route::resource('rawdata-rekon','RawdataRekonController');
         Route::resource('kpi','KpiController');
+        Route::resource('excel','ExcelController');
         Route::resource('recipient','RecipientController');
         Route::resource('user','UserController');
+        Route::resource('allData','DBController');
+        Route::resource('national','NationalController');
         
         // routing for rawdata crm
         Route::get('alldata', 'RawdataController@alldata');
@@ -60,6 +63,11 @@ Route::group(['middleware' => ['auth']], function () {
         // routing for template mail
         Route::get('template-email', 'MailController@index')->name("mail.index");
         Route::post('template-email', 'MailController@update')->name("mail.update");
+
+        // routing serpo regional
+        Route::get('region', 'SerpoController@index');
+        Route::post('region','SerpoController@reload');
+
     });
     
     // routing for dashboard crm
