@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5864404228b3e813683ceb02eec8213c",
+    "content-hash": "9428d98b859d0f24638fd26c3435575e",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -715,16 +715,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.7.0",
+            "version": "1.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "53330f47520498c0ae1f61f7e2c90f55690c06a3"
+                "reference": "337e3ad8e5716c15f9657bd214d16cc5e69df268"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/53330f47520498c0ae1f61f7e2c90f55690c06a3",
-                "reference": "53330f47520498c0ae1f61f7e2c90f55690c06a3",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/337e3ad8e5716c15f9657bd214d16cc5e69df268",
+                "reference": "337e3ad8e5716c15f9657bd214d16cc5e69df268",
                 "shasum": ""
             },
             "require": {
@@ -749,12 +749,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Psr7\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\Psr7\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -762,12 +762,33 @@
             ],
             "authors": [
                 {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                },
+                {
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
                     "homepage": "https://github.com/mtdowling"
                 },
                 {
+                    "name": "George Mponos",
+                    "email": "gmponos@gmail.com",
+                    "homepage": "https://github.com/gmponos"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/Nyholm"
+                },
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com",
+                    "homepage": "https://github.com/sagikazarmark"
+                },
+                {
                     "name": "Tobias Schultze",
+                    "email": "webmaster@tubo-world.de",
                     "homepage": "https://github.com/Tobion"
                 }
             ],
@@ -782,7 +803,25 @@
                 "uri",
                 "url"
             ],
-            "time": "2020-09-30T07:37:11+00:00"
+            "support": {
+                "issues": "https://github.com/guzzle/psr7/issues",
+                "source": "https://github.com/guzzle/psr7/tree/1.8.5"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/GrahamCampbell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/Nyholm",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/psr7",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-03-20T21:51:18+00:00"
         },
         {
             "name": "jeroennoten/laravel-adminlte",
@@ -838,60 +877,6 @@
                 "laravel"
             ],
             "time": "2020-09-26T21:28:24+00:00"
-        },
-        {
-            "name": "jeroenzwart/laravel-csv-seeder",
-            "version": "v1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jeroenzwart/laravel-csv-seeder.git",
-                "reference": "5c795c6c5f8a4e77c77f50a7adbfe5a6df4f4f3b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jeroenzwart/laravel-csv-seeder/zipball/5c795c6c5f8a4e77c77f50a7adbfe5a6df4f4f3b",
-                "reference": "5c795c6c5f8a4e77c77f50a7adbfe5a6df4f4f3b",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": ">=5.0.0",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "JeroenZwart\\CsvSeeder\\CsvSeederServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "JeroenZwart\\CsvSeeder\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jeroen Zwart",
-                    "email": "mailme@jeroenzwart.nl"
-                }
-            ],
-            "description": "Seed the database with Laravel using CSV files",
-            "homepage": "https://github.com/jeroenzwart/laravel-csv-seeder",
-            "keywords": [
-                "csv",
-                "excel",
-                "laravel",
-                "seed",
-                "seeder",
-                "seeding",
-                "seeds"
-            ],
-            "time": "2020-09-30T20:46:12+00:00"
         },
         {
             "name": "laravel/framework",
@@ -2414,6 +2399,9 @@
                 "request",
                 "response"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/http-message/tree/master"
+            },
             "time": "2016-08-06T14:39:51+00:00"
         },
         {
@@ -2621,6 +2609,10 @@
                 }
             ],
             "description": "A polyfill for getallheaders.",
+            "support": {
+                "issues": "https://github.com/ralouphie/getallheaders/issues",
+                "source": "https://github.com/ralouphie/getallheaders/tree/develop"
+            },
             "time": "2019-03-08T08:55:37+00:00"
         },
         {
@@ -5278,6 +5270,60 @@
             "time": "2020-07-09T08:09:16+00:00"
         },
         {
+            "name": "jeroenzwart/laravel-csv-seeder",
+            "version": "v1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeroenzwart/laravel-csv-seeder.git",
+                "reference": "5c795c6c5f8a4e77c77f50a7adbfe5a6df4f4f3b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeroenzwart/laravel-csv-seeder/zipball/5c795c6c5f8a4e77c77f50a7adbfe5a6df4f4f3b",
+                "reference": "5c795c6c5f8a4e77c77f50a7adbfe5a6df4f4f3b",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=5.0.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "JeroenZwart\\CsvSeeder\\CsvSeederServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JeroenZwart\\CsvSeeder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeroen Zwart",
+                    "email": "mailme@jeroenzwart.nl"
+                }
+            ],
+            "description": "Seed the database with Laravel using CSV files",
+            "homepage": "https://github.com/jeroenzwart/laravel-csv-seeder",
+            "keywords": [
+                "csv",
+                "excel",
+                "laravel",
+                "seed",
+                "seeder",
+                "seeding",
+                "seeds"
+            ],
+            "time": "2020-09-30T20:46:12+00:00"
+        },
+        {
             "name": "mockery/mockery",
             "version": "1.4.2",
             "source": {
@@ -6892,5 +6938,6 @@
     "platform": {
         "php": "^7.2.5"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
 }
